@@ -6,6 +6,11 @@ script_dir=$(dirname $script_path)
 
 set -e
 
+# Install oh-my-zsh
+if [ ! -d $HOME/.oh-my-zsh ]; then
+    sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+fi
+
 for file in $script_dir/*; do
     # don't copy this script over
     if [[ $file == $script_path ]]; then
@@ -28,9 +33,3 @@ for file in $script_dir/*; do
 
     ln -sf $file $odir/.$(basename $file)
 done
-
-# Install oh-my-zsh
-if [ ! -d $HOME/.oh-my-zsh ]; then
-    sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-fi
-
