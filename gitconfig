@@ -1,0 +1,29 @@
+[user]
+	email = nathan@meta.sc
+	name = Nathan Perry
+[core]
+	excludesfile = /home/mammothbane/.gitignore_global
+[push]
+	default = current
+[github]
+	user = mammothbane
+[credential]
+	helper = cache
+
+[url "git@github.com:"]
+	insteadOf = https://github.com/
+[alias]
+	graph = log --graph --decorate --all
+	g = log --graph --decorate --all
+	b = branch
+	bd = branch -d
+	bs = "!git branch --set-upstream-to=origin/\"$(git rev-parse --abbrev-ref HEAD)\" \"$(git rev-parse --abbrev-ref HEAD)\""
+	co = checkout
+	c = commit
+	s = status
+	prune = remote prune origin
+	p = remote prune origin
+	
+[init]
+	templatedir = ~/.git_template
+	
