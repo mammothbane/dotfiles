@@ -1,29 +1,36 @@
 #!/usr/bin/env bash
 
-ODIR=$HOME
+odir=$HOME
+script_path=$(realpath $0)
+script_dir=$(dirname $script_path)
 
 set -e
 
-for file in $PWD/*; do
-    #echo considering $file
-    if [[ $file == $(realpath $0) ]]; then
+for file in $script_dir/*; do
+    # don't copy this script over
+    if [[ $file == $script_path ]]; then
 	continue
     fi
 
-    DEST=$ODIR/.$(basename $file)
-    
-    if [ -d $DEST ]; then
-	if [ -L $DEST ]; then
-	    rm $DEST
-	    ln -sf $file $ODIR/.$(basename $file)
+    dest=$odir/.$(basename $file)
+        
+    if [ -e $dest ]; then
+	if [ -L $dest ]; then
+	    rm $dest
 	else
-	    echo "Error: directory $file exists and isn't a symlink."
-	    exit 1
+	    if [ ! -n $oldDir ]; then
+		oldDir=$HOME/.old
+	    fi
+
+	    mv $dest $oldDir/$(basename $dest)
 	fi
-    else
-	ln -sf  $file $ODIR/.$(basename $file)
     fi
 
-    #echo linking $file to $ODIR/.$(basename $file)
-    
+    ln -sf $file $odir/.$(basename $file)
 done
+
+# Install oh-my-zsh
+if [ ! -d $HOME/.oh-my-zsh ]; then
+    sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+fi
+
