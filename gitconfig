@@ -2,27 +2,45 @@
 	email = nathan@meta.sc
 	name = Nathan Perry
 [core]
-	excludesfile = /home/mammothbane/.gitignore_global
+	excludesfile = ~/.gitignore_global
 [push]
 	default = current
 [github]
 	user = mammothbane
 [credential]
 	helper = cache
-
 [url "git@github.com:"]
 	insteadOf = https://github.com/
 [alias]
 	graph = log --graph --decorate --all
 	g = log --graph --decorate --all
+
 	b = branch
 	bd = branch -d
-	bs = "!git branch --set-upstream-to=origin/\"$(git rev-parse --abbrev-ref HEAD)\" \"$(git rev-parse --abbrev-ref HEAD)\""
+	bD = branch -D
+	bn = rev-parse --abbrev-ref HEAD
+	
+	# "branch set-upstream" or "bullshit"
+	bs = "!bname=\"$(git bn)\" && git branch --set-upstream-to=origin/$bname bname" 
+
+	# fails if the current branch isn't tracked
+	tracked = "!git rev-parse --abbrev-ref --symbolic-full-name @{u} > /dev/null 2>&1"
+	
 	co = checkout
 	c = commit
 	s = status
 	prune = remote prune origin
 	p = remote prune origin
+
+	rh = reset --hard
+	dlc = reset --hard @{u} # discard local changes
+
+	# full rebase
+	rb = "! bname=\"$(git bn)\" && \
+	       	git branch old-$bname && \
+		git tracked && \
+		git fetch && \
+		git rebase origin/master"
 	
 [init]
 	templatedir = ~/.git_template
