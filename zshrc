@@ -1,7 +1,9 @@
+# -*- mode: shell-script -*-
+
 # oh-my-zsh config
-if [ -d ~/.oh-my-zsh ]; then
+if [ -d $HOME/.oh-my-zsh ]; then
     # Path to your oh-my-zsh installation.
-    export ZSH="~/.oh-my-zsh"
+    export ZSH="$HOME/.oh-my-zsh"
 
     # Set name of the theme to load.
     # Look in ~/.oh-my-zsh/themes/
@@ -48,6 +50,8 @@ if [ -d ~/.oh-my-zsh ]; then
     # ZSH_CUSTOM=/path/to/new-custom-folder
 
     plugins=(git rails golang github)
+
+    . $ZSH/oh-my-zsh.sh
 fi
     
     
@@ -61,7 +65,6 @@ export VISUAL="emacs"
 
 export GIT_TEMPLATE_DIR=$HOME/.git_template
 
-source $ZSH/oh-my-zsh.sh
 
 # aliases
 

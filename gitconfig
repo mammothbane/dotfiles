@@ -1,3 +1,4 @@
+# -*- mode: gitconfig -*-
 [user]
 	email = nathan@meta.sc
 	name = Nathan Perry
