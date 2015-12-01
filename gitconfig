@@ -41,6 +41,8 @@
 		git tracked && \
 		git fetch && \
 		git rebase origin/master"
+
+	amend = commit --amend --no-edit
 	
 [init]
 	templatedir = ~/.git_template
