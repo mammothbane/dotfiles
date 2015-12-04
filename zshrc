@@ -16,20 +16,9 @@ if [ -d $HOME/.oh-my-zsh ]; then
     . $ZSH/oh-my-zsh.sh
 fi
     
-    
 # User configuration
-
-export PATH="$HOME/src/appengine_go:$HOME/src/appengine_py:$HOME/bin:$HOME/src/go/bin:$HOME/src/google-cloud-sdk/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/jvm/java-8-oracle/bin:/usr/lib/jvm/java-8-oracle/db/bin:/usr/lib/jvm/java-8-oracle/jre/bin:$HOME/.rvm/bin:$HOME/.rvm/bin"
-export GOPATH=$HOME/src/go
-
-export EDITOR="emacs -nw"
-export VISUAL="emacs"
-
-export GIT_TEMPLATE_DIR=$HOME/.git_template
-
-# overwrite versioned config with local
-if [ -f ~/.local_aliases ]; then
-    . ~/.local_aliases
+if [ -f ~/.rc ]; then
+    . ~/.rc
 fi
 
 if [ -f ~/.local_zshrc ]; then
