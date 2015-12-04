@@ -44,7 +44,8 @@
 		git rebase origin/master"
 
 	amend = commit --amend --no-edit
-	
+
+	yolo = "!git commit -m \"$(curl -s whatthecommit.com/index.txt)\""
 [init]
 	templatedir = ~/.git_template
 
