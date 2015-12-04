@@ -1,0 +1,27 @@
+# -*- mode: shell-script -*-
+
+if (which dev_appserver.py); then
+    alias da=dev_appserver.py
+fi
+
+if (which emacs); then
+    alias xemacs="/usr/bin/emacs"
+    alias emacs="/usr/bin/emacs -nw"
+fi
+
+if (which sl); then
+    alias sl="sl -e"
+fi
+
+if (which hub); then
+    alias git=hub
+fi
+
+if (which xclip); then
+    alias xclip="xclip -selection c"
+fi
+
+alias g=git
+alias logvew="less +F"
+alias lv="less +F"
+
