@@ -22,7 +22,7 @@
 	bn = rev-parse --abbrev-ref HEAD
 	
 	# "branch set-upstream" or "bullshit"
-	bs = "!bname=\"$(git bn)\" && git branch --set-upstream-to=origin/$bname bname" 
+	bs = "!bname=\"$(git bn)\" && git branch --set-upstream-to=origin/$bname $bname" 
 
 	# fails if the current branch isn't tracked
 	tracked = "!git rev-parse --abbrev-ref --symbolic-full-name @{u} > /dev/null 2>&1"
