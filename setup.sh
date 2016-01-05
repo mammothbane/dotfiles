@@ -12,6 +12,11 @@ if [ ! -d $HOME/.oh-my-zsh ]; then
     sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 fi
 
+if [ ! -f /usr/local/bin/thefuck ]; then
+    echo installing fuck
+    wget -O - https://raw.githubusercontent.com/nvbn/thefuck/master/install.sh | sh - && $0
+fi
+
 mkdir -p $oldDir # create a directory to house the old contents of the home directory
 
 for file in $script_dir/*; do

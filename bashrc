@@ -88,3 +88,4 @@ fi
 if [ -f ~/.rc ]; then
     . ~/.rc
 fi
+eval $(thefuck --alias)
