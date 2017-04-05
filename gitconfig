@@ -1,6 +1,6 @@
 # -*- mode: gitconfig -*-
 [user]
-	email = nathan@meta.sc
+	email = avaglir@gmail.com
 	name = Nathan Perry
 [core]
 	excludesfile = ~/.gitignore_global
