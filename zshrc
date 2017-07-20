@@ -25,4 +25,3 @@ if [ -f ~/.local_zshrc ]; then
     . ~/.local_zshrc
 fi
 
-eval $(thefuck --alias)

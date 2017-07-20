@@ -88,4 +88,9 @@ fi
 if [ -f ~/.rc ]; then
     . ~/.rc
 fi
-eval $(thefuck --alias)
+
+if [ -f ~/.local_bashrc ]; then
+    . ~/.local_bashrc
+fi
+
+
