@@ -23,7 +23,6 @@ if [ -f ~/.local_aliases ]; then
     . ~/.local_aliases
 fi
 
-
 if [ -f ~/.local_env ]; then
     . ~/.local_env
 fi

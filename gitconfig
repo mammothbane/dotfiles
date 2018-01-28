@@ -4,6 +4,7 @@
 	name = Nathan Perry
 [core]
 	excludesfile = ~/.gitignore_global
+	autocrlf = input
 [push]
 	default = current
 [github]
@@ -48,4 +49,3 @@
 	yolo = "!git commit -m \"$(curl -s whatthecommit.com/index.txt)\""
 [init]
 	templatedir = ~/.git_template
-
