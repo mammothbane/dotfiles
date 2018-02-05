@@ -14,8 +14,8 @@ if [ -d $HOME/.oh-my-zsh ]; then
     plugins=(git rails golang github)
 
     . $ZSH/oh-my-zsh.sh
-fi
-    
+fi  
+
 # User configuration
 if [ -f ~/.rc ]; then
     . ~/.rc

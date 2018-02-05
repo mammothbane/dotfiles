@@ -9,6 +9,14 @@ case $- in
       *) return;;
 esac
 
+if [ -f ~/.bash_aliases ]; then
+    . ~/.bash_aliases
+fi
+
+if [ -f ~/.rc ]; then
+    . ~/.rc
+fi
+
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
 HISTCONTROL=ignoreboth
@@ -81,16 +89,7 @@ if ! shopt -oq posix; then
   fi
 fi
 
-if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
-fi
-
-if [ -f ~/.rc ]; then
-    . ~/.rc
-fi
-
 if [ -f ~/.local_bashrc ]; then
     . ~/.local_bashrc
 fi
-
 

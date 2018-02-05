@@ -7,8 +7,6 @@
 	autocrlf = input
 [push]
 	default = current
-[github]
-	user = mammothbane
 [credential]
 	helper = cache
 [url "git@github.com:"]

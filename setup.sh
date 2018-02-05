@@ -7,15 +7,16 @@ oldDir=$HOME/.old
 
 set -e
 
+sudo apt update
+sudo apt install -yqq python3-dev python3-pip zsh
+
 # Install oh-my-zsh
 if [ ! -d $HOME/.oh-my-zsh ]; then
     sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 fi
 
-if [ ! -f /usr/local/bin/thefuck ]; then
-    echo installing fuck
-    wget -O - https://raw.githubusercontent.com/nvbn/thefuck/master/install.sh | sh - && $0
-fi
+echo installing fuck
+pip3 install --user thefuck
 
 mkdir -p $oldDir # create a directory to house the old contents of the home directory
 
@@ -36,6 +37,6 @@ for file in $script_dir/*; do
 	fi
     fi
 
-    # link the file where it should be 
+    # link the file where it should be
     ln -sf $file $dest
 done
