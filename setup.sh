@@ -1,5 +1,12 @@
 #!/usr/bin/env bash
 
+if ! type -P realpath ; then
+	realpath() {
+		[[ $1 = /* ]] && echo "$1" || echo "$PWD/${1#./}"
+	}
+fi
+
+
 odir=$HOME
 script_path=$(realpath $0)
 script_dir=$(dirname $script_path)
@@ -7,8 +14,21 @@ oldDir=$HOME/.old
 
 set -e
 
-sudo apt update
-sudo apt install -yqq python3-dev python3-pip zsh
+case "$(uname -s)" in
+	Linux*)
+		sudo apt update
+		sudo apt install -yqq python3-dev python3-pip zsh
+		;;
+	Darwin*)
+		if ! type -P brew ; then
+			/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+		fi
+
+		brew install ruby python
+		brew link --overwrite ruby
+
+		;;
+esac
 
 # Install oh-my-zsh
 if [ ! -d $HOME/.oh-my-zsh ]; then
