@@ -24,8 +24,8 @@ if (which dev_appserver.py &> /dev/null); then
 fi
 
 if (which emacs &> /dev/null); then
-    alias xemacs="/usr/bin/emacs"
-    alias emacs="/usr/bin/emacs -nw"
+    alias xemacs=$(which emacs)
+    alias emacs="$(which emacs) -nw"
 fi
 
 if (which sl &> /dev/null); then
