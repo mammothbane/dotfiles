@@ -1,6 +1,6 @@
 # -*- mode: shell-script -*-
 
-export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/jvm/java-8-oracle/bin:/usr/lib/jvm/java-8-oracle/db/bin:/usr/lib/jvm/java-8-oracle/jre/bin:$PATH"
+export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/jvm/java-8-oracle/bin:/usr/lib/jvm/java-8-oracle/db/bin:/usr/lib/jvm/java-8-oracle/jre/bin:$HOME/.local/bin:$PATH"
 
 if [ -d "$HOME/bin" ] ; then
 	PATH="$HOME/bin:$PATH"
@@ -20,7 +20,7 @@ if [ -d "$HOME/.rvm" ]; then
 	PATH="$HOME/.rvm/bin:$PATH"
 fi
 
-export EDITOR="emacs -nw"
-export VISUAL="emacs"
+export EDITOR="vim"
+export VISUAL="vim"
 
 export GIT_TEMPLATE_DIR=$HOME/.git_template
