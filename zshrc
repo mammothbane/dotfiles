@@ -11,7 +11,7 @@ if [ -d $HOME/.oh-my-zsh ]; then
     # time that oh-my-zsh is loaded.
     ZSH_THEME="robbyrussell"
 
-    plugins=(git rails golang github)
+    plugins=(gitfast)
 
     . $ZSH/oh-my-zsh.sh
 fi  

@@ -2,6 +2,7 @@
 [user]
 	email = np@nathanperry.dev
 	name = Nathan Perry
+    signingKey = 2E4DE058CFDBB6F4
 [core]
 	excludesfile = ~/.gitignore_global
 	autocrlf = input
@@ -50,3 +51,5 @@
 	stashq = -c commit.gpgsign=false stash
 [init]
 	templatedir = ~/.git_template
+[commit]
+    gpgsign = true
