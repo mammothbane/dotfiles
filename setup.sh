@@ -17,7 +17,7 @@ set -e
 case "$(uname -s)" in
 	Linux*)
 		sudo apt update
-		sudo apt install -yqq python3-dev python3-pip zsh curl
+		sudo apt install -yqq python3-dev python3-pip zsh curl gpg-agent scdaemon
 		;;
 	Darwin*)
 		if ! type -P brew ; then
