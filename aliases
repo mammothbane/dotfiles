@@ -43,3 +43,5 @@ fi
 alias g=git
 alias logvew="less +F"
 alias lv="less +F"
+
+alias rs="exec -l $SHELL"
