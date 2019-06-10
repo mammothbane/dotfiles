@@ -2,6 +2,7 @@ filetype plugin on
 set hidden
 set autochdir
 set mouse=n
+set modeline
 
 if empty(glob('~/.vim/autoload/plug.vim'))
 	silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
@@ -19,7 +20,6 @@ Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'scrooloose/nerdcommenter'
 let g:NERDSpaceDelims = 1
 
-autocmd vimenter * NERDTree
 map <C-n> :NERDTreeToggle<CR>
 
 Plug 'rust-lang/rust.vim'
