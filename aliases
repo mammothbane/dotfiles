@@ -45,3 +45,7 @@ alias logvew="less +F"
 alias lv="less +F"
 
 alias rs="exec -l $SHELL"
+
+longpath() {
+    echo ${PATH//:/\\n}
+}

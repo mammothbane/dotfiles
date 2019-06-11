@@ -53,3 +53,5 @@
 	templatedir = ~/.git_template
 [commit]
     gpgsign = true
+[rerere]
+	enabled = true
