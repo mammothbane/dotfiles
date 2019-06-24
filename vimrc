@@ -3,6 +3,7 @@ set hidden
 set autochdir
 set mouse=n
 set modeline
+set timeoutlen=1000 ttimeoutlen=10
 
 if empty(glob('~/.vim/autoload/plug.vim'))
 	silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim

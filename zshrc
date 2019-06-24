@@ -11,10 +11,16 @@ if [ -d $HOME/.oh-my-zsh ]; then
     # time that oh-my-zsh is loaded.
     ZSH_THEME="robbyrussell"
 
-    plugins=(gitfast)
+    export MODE_INDICATOR="%{$fg_bold[yellow]%}[% NORMAL]% %{$reset_color%}"
+
+    plugins=(gitfast vi-mode)
 
     . $ZSH/oh-my-zsh.sh
 fi  
+
+# vim mode
+bindkey -v
+export KEYTIMEOUT=1
 
 # User configuration
 if [ -f ~/.rc ]; then
