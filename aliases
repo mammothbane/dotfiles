@@ -49,3 +49,7 @@ alias rs="exec -l $SHELL"
 longpath() {
     echo ${PATH//:/\\n}
 }
+
+df() {
+    df $@ | grep -v '/snap/'
+}
