@@ -6,8 +6,6 @@
 [core]
 	excludesfile = ~/.gitignore_global
 	autocrlf = input
-[include]
-	path = ~/.gitconfig_local
 [push]
 	default = current
 [pull]
@@ -55,3 +53,5 @@
     gpgsign = true
 [rerere]
 	enabled = true
+[include]
+	path = ~/.gitconfig_local
