@@ -17,7 +17,7 @@ set -e
 case "$(uname -s)" in
 	Linux*)
 		sudo apt update
-		sudo apt install -yqq python3-dev python3-pip zsh curl gpg-agent scdaemon
+		sudo apt install -yqq python3-dev python3-pip zsh curl gpg-agent scdaemon fonts-firacode
 		;;
 	Darwin*)
 		if ! type -P brew ; then
@@ -48,11 +48,10 @@ for file in $script_dir/*; do
 
     dest=$odir/.$(basename $file)
 
-    # if the file exists and is a symlink, remove it so we can re-link it
+    # if the file exists and is not a symlink
     if [ -e $dest ]; then
-	if [ -L $dest ]; then
-	    rm $dest
-	else # otherwise, move the old file into the .old directory with a timestamp
+	if [ ! -L $dest ]; then
+        # move the old file into the .old directory with a timestamp
 	    mv $dest $oldDir/$(basename $dest)-$(date +%s)
 	fi
     fi
