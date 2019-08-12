@@ -1,0 +1,80 @@
+{
+    "files.autoSave": "onFocusChange",
+    "files.trimTrailingWhitespace": true,
+    "files.insertFinalNewline": true,
+    "files.exclude": {
+        "**/.git": true,
+        "**/.DS_Store": true,
+        "**/.meteor/local": true,
+        "**/.idea": true,
+        "**/*.iml": true,
+    },
+
+    "editor.acceptSuggestionOnEnter": "on",
+    "editor.wordBasedSuggestions": false,
+    "editor.tabSize": 4,
+    "editor.minimap.enabled": true,
+    "editor.fontFamily": "'Fira Code Retina', 'Fira Code', 'Hasklig', 'Input Mono', 'Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'",
+    "editor.fontLigatures": true,
+    "editor.fontSize": 16,
+    "editor.cursorBlinking": "solid",
+
+    "explorer.openEditors.visible": 0,
+    "explorer.decorations.badges": false,
+    "explorer.confirmDelete": false,
+
+    "breadcrumbs.enabled": false,
+    "breadcrumbs.symbolPath": "off",
+
+    "editor.lineNumbers": "relative",
+    "editor.minimap.showSlider": "always",
+
+    "workbench.startupEditor": "newUntitledFile",
+    "workbench.colorTheme": "Darcula",
+    "workbench.tree.indent": 28,
+    "workbench.tree.renderIndentGuides": "none",
+
+    "workbench.colorCustomizations": {
+        "editor.background": "#2b2b2b",
+
+        "gitDecoration.modifiedResourceForeground": "#568eb8",
+        "gitDecoration.addedResourceForeground": "#4f8654",
+        "gitDecoration.untrackedResourceForeground": "#bf6657",
+        "gitDecoration.conflictingResourceForeground": "#860000",
+        "gitDecoration.deletedResourceForeground": "#57666b",
+        "gitDecoration.ignoredResourceForeground": "#666",
+
+        "editorGutter.background": "#313335",
+        "editorGutter.modifiedBackground": "#374752",
+        "editorGutter.addedBackground": "#384c38",
+        "editorGutter.deletedBackground": "#656e76",
+
+        "diffEditor.insertedTextBackground": "#294436",
+        "diffEditor.removedTextBackground": "#442a29",
+
+        "sideBar.background": "#3c3f41",
+        "sideBar.border": "#0000",
+
+        "activityBar.background": "#3c3f41",
+        "activityBar.border": "#323232",
+
+        "editorGroup.border": "#3e4143",
+        "editorGroupHeader.tabsBackground": "#3e4143",
+
+        "tab.activeBackground": "#4f5355",
+        "tab.hoverBackground": "#2b2b2b",
+        "tab.inactiveBackground": "#3e4143",
+
+        "tab.activeBorder": "#0000",
+        "tab.border": "#0000",
+
+        "focusBorder": "#ffffff04"
+    },
+
+    "git.confirmSync": false,
+
+    "gitlens.advanced.abbreviatedShaLength": 6,
+    "gitlens.blame.avatars": false,
+
+    "window.zoomLevel": 0,
+}
