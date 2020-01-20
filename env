@@ -22,6 +22,7 @@ fi
 
 export EDITOR="vim"
 export VISUAL="vim"
+export LESS="-Ri"
 
 export GIT_TEMPLATE_DIR=$HOME/.git_template
 

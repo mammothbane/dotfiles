@@ -1,9 +1,13 @@
 filetype plugin on
+
 set hidden
 set autochdir
 set mouse=n
 set modeline
-set timeoutlen=1000 ttimeoutlen=10
+
+set ttimeout
+set timeoutlen=1000
+set ttimeoutlen=10
 
 if empty(glob('~/.vim/autoload/plug.vim'))
 	silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
@@ -28,7 +32,8 @@ let g:rustfmt_autosave = 1
 let g:rust_clip_command = 'xclip -selection clipboard'
 
 let g:go_version_warning = 0
-Plug 'fatih/vim-go'
+let g:go_fmt_command = "goimports"
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'airblade/vim-gitgutter'
@@ -39,6 +44,8 @@ Plug 'vim-airline/vim-airline-themes'
 
 Plug 'leafgarland/typescript-vim'
 Plug 'Quramy/tsuquyomi'
+
+Plug 'mustache/vim-mustache-handlebars'
 
 Plug 'editorconfig/editorconfig-vim'
 
@@ -70,6 +77,8 @@ nnoremap <leader>cd :cd %:p:h<CR>:pwd<CR>
 inoremap jj <Esc>
 nnoremap n nzz
 nnoremap } }zz
+
+inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
 
 set scrolloff=10
 

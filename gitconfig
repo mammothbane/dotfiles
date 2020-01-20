@@ -33,6 +33,8 @@
 	prune = remote prune origin
 	p = remote prune origin
 
+    detach = "! git checkout $(git rev-parse HEAD)"
+
 	rh = reset --hard
 	dlc = reset --hard @{u} # discard local changes
 
