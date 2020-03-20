@@ -1,9 +1,0 @@
-# -*- mode: gitignore -*-
-*~
-*.iml
-.idea
-*.log
-.ensime
-.ensime_cache
-.DS_Store
-*.swp
