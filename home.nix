@@ -97,7 +97,16 @@ in
     };
 
     keychain = {
-      enable = true;
+      enable = false;
+      agents = [
+        "gpg"
+        "ssh"
+      ];
+      inheritType = "any";
+      extraFlags = [
+        "--gpg2"
+        "--systemd"
+      ];
     };
 
     lesspipe.enable = true;
