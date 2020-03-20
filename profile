@@ -9,4 +9,3 @@ if [ -n "$BASH_VERSION" ]; then
 else
     source "$HOME/.rc"
 fi
-
