@@ -218,7 +218,7 @@ in
     spotifyd.enable = true;
 
     # TODO
-    lieer = {};
+    # lieer = {};
     muchsync = {};
     polybar = {};
     random-background = {};
