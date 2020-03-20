@@ -27,9 +27,10 @@ in
       youtube-dl
       nmap
 
-      discord
+      # discord
 
-      # download not working: minecraft
+      # download not working
+      # minecraft
 
       glibcLocales
 
@@ -37,8 +38,8 @@ in
       python3.pkgs.pynvim
       python3.pkgs.pip
 
-      yubikey-personalization
-      yubioath-desktop
+      # yubikey-personalization
+      # yubioath-desktop
     ];
     sessionVariables = {
       GCC_COLORS = "error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01";
@@ -196,9 +197,9 @@ in
 
     # TODO
     irssi = {};
-    kitty = {};
+    # kitty = {};
     notmuch = {};
-    obs-studio = {};
+    # obs-studio = {};
     starship = {};
   };
 
@@ -215,7 +216,7 @@ in
 
     keybase.enable = true;
     lorri.enable = true;
-    spotifyd.enable = true;
+    # spotifyd.enable = true;
 
     # TODO
     # lieer = {};
