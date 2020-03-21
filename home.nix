@@ -206,7 +206,7 @@ in
   services = {
     gpg-agent = {
       enable = true;
-      enableExtraSocket = true;
+      # enableExtraSocket = true;
       enableSshSupport = true;
       enableScDaemon = true;
       defaultCacheTtl = 60;
