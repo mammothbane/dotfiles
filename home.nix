@@ -27,6 +27,8 @@ in
       youtube-dl
       nmap
 
+      haskellPackages.niv
+
       # discord
 
       # download not working
