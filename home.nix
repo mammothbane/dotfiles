@@ -211,14 +211,18 @@ in
       enableScDaemon = true;
       defaultCacheTtl = 60;
       maxCacheTtl = 120;
-      pinentryFlavor = "gnome3";
+
+      # TODO(unstable)
+      extraConfig = ''
+        pinentry-program ${pkgs.pinentry-curses}/bin/pinentry-curses
+      '';
     };
 
     keybase.enable = true;
     lorri.enable = true;
     # spotifyd.enable = true;
 
-    # TODO
+    # TODO(unstable)
     # lieer = {};
     muchsync = {};
     polybar = {};
