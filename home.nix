@@ -46,7 +46,7 @@ in
       EDITOR = "${pkgs.vim}/bin/vim";
       VISUAL = "${pkgs.vim}/bin/vim";
       KEYTIMEOUT = 1;
-      NIX_PATH= "$HOME/.nix-defexpr/channels:$NIX_PATH";
+      NIX_PATH = "$HOME/.nix-defexpr/channels:$NIX_PATH";
       LOCALE_ARCHIVE = "${pkgs.glibcLocales}/lib/locale/locale-archive";
 
       PATH = "$PATH:$HOME/bin";
@@ -214,7 +214,7 @@ in
 
       # TODO(unstable)
       extraConfig = ''
-        pinentry-program ${pkgs.pinentry-curses}/bin/pinentry-curses
+        pinentry-program ${pkgs.pinentry}/bin/pinentry-curses
       '';
     };
 
