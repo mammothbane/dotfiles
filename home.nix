@@ -92,7 +92,7 @@ in
 
     htop = {
       enable = true;
-      delay = 2;
+      delay = 6;
       hideThreads = true;
       hideUserlandThreads = true;
       highlightBaseName = true;
