@@ -43,8 +43,8 @@ in
     ];
     sessionVariables = {
       GCC_COLORS = "error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01";
-      EDITOR = "${pkgs.vim}/bin/vim";
-      VISUAL = "${pkgs.vim}/bin/vim";
+      EDITOR = "vim";
+      VISUAL = "vim";
       KEYTIMEOUT = 1;
       NIX_PATH = "$HOME/.nix-defexpr/channels:$NIX_PATH";
       LOCALE_ARCHIVE = "${pkgs.glibcLocales}/lib/locale/locale-archive";
@@ -91,6 +91,7 @@ in
     };
 
     htop = {
+      enable = true;
       delay = 2;
       hideThreads = true;
       hideUserlandThreads = true;
