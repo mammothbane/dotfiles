@@ -1,0 +1,14 @@
+{
+    "ownpkgs": {
+        "branch": "master",
+        "description": null,
+        "homepage": null,
+        "owner": "mammothbane",
+        "repo": "nixpkgs-own",
+        "rev": "924b569893897f4d0b22cfe2564e578595a50c3c",
+        "sha256": "01rcaz40dnmayxdfw4cmn199ys0q6didp1g5s07rblg65npc5nnf",
+        "type": "tarball",
+        "url": "https://github.com/mammothbane/nixpkgs-own/archive/924b569893897f4d0b22cfe2564e578595a50c3c.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    }
+}

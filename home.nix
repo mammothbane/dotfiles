@@ -9,6 +9,8 @@ let
     alias xclip='xclip -selection c'
     alias rs="exec -l $SHELL"
   '';
+  sources = import nix/sources.nix;
+  cordless = import "${sources.ownpkgs}/cordless";
 in
 {
   nixpkgs.config.allowUnfree = true;
@@ -28,6 +30,7 @@ in
       nmap
 
       haskellPackages.niv
+      cordless
 
       # discord
 
