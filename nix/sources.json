@@ -5,10 +5,10 @@
         "homepage": null,
         "owner": "mammothbane",
         "repo": "nixpkgs-own",
-        "rev": "924b569893897f4d0b22cfe2564e578595a50c3c",
-        "sha256": "01rcaz40dnmayxdfw4cmn199ys0q6didp1g5s07rblg65npc5nnf",
+        "rev": "0dfdad22c18d20f9067168af8e86eeef53be13a0",
+        "sha256": "1fy0cayxk51fjrf50i927ng918rn9y3cvdwpsqfiv8v9kwd0sl88",
         "type": "tarball",
-        "url": "https://github.com/mammothbane/nixpkgs-own/archive/924b569893897f4d0b22cfe2564e578595a50c3c.tar.gz",
+        "url": "https://github.com/mammothbane/nixpkgs-own/archive/0dfdad22c18d20f9067168af8e86eeef53be13a0.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     }
 }
