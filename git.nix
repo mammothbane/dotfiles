@@ -13,20 +13,22 @@
     amend = "commit --amend --no-edit";
     s = "status";
 
+    nosign = "ns";
+    ns = "!git -c commit.gpgsign=false";
+
     prune = "remote prune origin";
     p = "remote prune origin";
 
     b = "branch";
     bd = "branch -d";
     bn = "rev-parse --abrev-ref HEAD";
-    bs = "!bname=\"$(${pkgs.git}/bin/git bn)\" && ${pkgs.git}/bin/git branch --set-upstream-to=origin/$bname $bname";
-    tracked = "!${pkgs.git}/bin/git rev-parse --abbrev-ref --symbolic-full-name @{u} > /dev/null 2>&1";
+    bs = "!bname=\"$(git bn)\" && git branch --set-upstream-to=origin/$bname $bname";
+    tracked = "!git rev-parse --abbrev-ref --symbolic-full-name @{u} > /dev/null 2>&1";
 
-    g = "log --graph  --decorate --all --date-order --pretty=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all";
+    g     = "graph";
     graph = "log --graph  --decorate --all --date-order --pretty=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all";
 
-    yolo = "!${pkgs.git}/bin/git commit -m \"$(${pkgs.curl}/bin/curl -s whatthecommit.com/index.txt)\"";
-    stashq = "-c commit.gpgsign=false stash";
+    yolo = "!git commit -m \"$(${pkgs.curl}/bin/curl -s whatthecommit.com/index.txt)\"";
   };
 
   signing = {

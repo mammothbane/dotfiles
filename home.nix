@@ -8,6 +8,8 @@ let
 
     alias xclip='xclip -selection c'
     alias rs="exec -l $SHELL"
+
+    alias hm=home-manager
   '';
   sources = import nix/sources.nix;
   cordless = import "${sources.ownpkgs}/cordless";
