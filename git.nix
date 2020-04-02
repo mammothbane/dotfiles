@@ -21,7 +21,7 @@
 
     b = "branch";
     bd = "branch -d";
-    bn = "rev-parse --abrev-ref HEAD";
+    bn = "rev-parse --abbrev-ref HEAD";
     bs = "!bname=\"$(git bn)\" && git branch --set-upstream-to=origin/$bname $bname";
     tracked = "!git rev-parse --abbrev-ref --symbolic-full-name @{u} > /dev/null 2>&1";
 
