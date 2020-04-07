@@ -1,6 +1,13 @@
 { pkgs, ... }:
 let
   sources = import nix/sources.nix;
+  overlay = _: pkgs: {
+    niv = import sources.niv {};
+  };
+  pinnedPkgs = import sources.nixpkgs {
+    overlays = [ overlay ];
+    config = {};
+  };
 
   aliases = ''
     alias ll='ls -alF'
@@ -15,7 +22,7 @@ let
 
   cordless = import "${sources.ownpkgs}/cordless";
 
-  pinentry = pkgs.pinentry;
+  pinentry = pkgs.pinentry-gnome;
 in
 {
   nixpkgs.config.allowUnfree = true;
@@ -47,6 +54,8 @@ in
       python3
       python3.pkgs.pynvim
       python3.pkgs.pip
+
+      pinnedPkgs.elixir_1_10
 
       pinentry
 
