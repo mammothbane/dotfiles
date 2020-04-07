@@ -1,6 +1,7 @@
-{ config, pkgs, ... }:
-
+{ pkgs, ... }:
 let
+  sources = import nix/sources.nix;
+
   aliases = ''
     alias ll='ls -alF'
     alias la='ls -A'
@@ -11,8 +12,10 @@ let
 
     alias hm=home-manager
   '';
-  sources = import nix/sources.nix;
+
   cordless = import "${sources.ownpkgs}/cordless";
+
+  pinentry = pkgs.pinentry;
 in
 {
   nixpkgs.config.allowUnfree = true;
@@ -44,6 +47,8 @@ in
       python3
       python3.pkgs.pynvim
       python3.pkgs.pip
+
+      pinentry
 
       # yubikey-personalization
       # yubioath-desktop
@@ -222,7 +227,7 @@ in
 
       # TODO(unstable)
       extraConfig = ''
-        pinentry-program ${pkgs.pinentry}/bin/pinentry-curses
+        pinentry-program ${pinentry}/bin/pinentry
       '';
     };
 
