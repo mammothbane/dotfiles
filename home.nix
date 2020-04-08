@@ -1,12 +1,15 @@
 { pkgs, ... }:
 let
+  nixpkgsConfig = import ./nixpkgs-config.nix;
+
   sources = import nix/sources.nix;
   overlay = _: pkgs: {
     niv = import sources.niv {};
   };
   pinnedPkgs = import sources.nixpkgs {
     overlays = [ overlay ];
-    config = {};
+    config = nixpkgsConfig // {
+    };
   };
 
   aliases = ''
@@ -20,21 +23,41 @@ let
     alias hm=home-manager
   '';
 
-  cordless = import "${sources.ownpkgs}/cordless";
+  ownpkgs-root  = pkgs.callPackage sources.ownpkgs {};
+  ownpkgs       = ownpkgs-root.pkgs;
+  ownlib        = ownpkgs-root.lib;
 
-  pinentry = pkgs.pinentry-gnome;
+  localConfig = with ownlib; let
+    tryLocal  = tryCallPackage ./local.nix {};
+    local     = orDefault tryLocal {};
+  in {
+    graphical = false;
+  } // tryLocal;
+
+  pinentry = if localConfig.graphical
+    then pinnedPkgs.pinentry-gnome
+    else pkgs.pinentry;
+
+  graphicalPackages = with pinnedPkgs; with ownpkgs; [
+    discord
+    minecraft
+
+    yubikey-personalization
+    # yubioath-desktop -- broken
+  ];
+
 in
 {
-  nixpkgs.config.allowUnfree = true;
+  nixpkgs.config = nixpkgsConfig;
+  xdg.configFile."nixpkgs/config.nix".source = ./nixpkgs-config.nix;
 
   home = {
     stateVersion = "19.09";
-    packages = with pkgs; [
+    packages = with pkgs; with ownpkgs; [
       jq
       ripgrep
       xclip
       iotop
-
       curl
       socat
       wget
@@ -43,11 +66,6 @@ in
 
       haskellPackages.niv
       cordless
-
-      # discord
-
-      # download not working
-      # minecraft
 
       glibcLocales
 
@@ -58,10 +76,9 @@ in
       pinnedPkgs.elixir_1_10
 
       pinentry
+    ]
+    ++ pkgs.lib.optionals localConfig.graphical graphicalPackages;
 
-      # yubikey-personalization
-      # yubioath-desktop
-    ];
     sessionVariables = {
       GCC_COLORS = "error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01";
       EDITOR = "vim";
@@ -234,7 +251,6 @@ in
       defaultCacheTtl = 60;
       maxCacheTtl = 120;
 
-      # TODO(unstable)
       extraConfig = ''
         pinentry-program ${pinentry}/bin/pinentry
       '';
