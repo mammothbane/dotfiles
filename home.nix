@@ -32,7 +32,7 @@ let
     local     = orDefault tryLocal {};
   in {
     graphical = false;
-  } // tryLocal;
+  } // local;
 
   pinentry = if localConfig.graphical
     then pinnedPkgs.pinentry-gnome
