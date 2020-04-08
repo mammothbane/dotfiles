@@ -4,13 +4,8 @@ let
   nixpkgsConfig = import ./nixpkgs-config.nix;
 
   sources = import ./nix/sources.nix;
-  overlay = _: pkgs: {
-    niv = import sources.niv {};
-  };
   pinnedPkgs = import sources.nixpkgs {
-    overlays = [ overlay ];
-    config = nixpkgsConfig // {
-    };
+    config = nixpkgsConfig // {};
   };
 
   aliases = ''
