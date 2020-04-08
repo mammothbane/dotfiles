@@ -3,7 +3,7 @@
 let
   nixpkgsConfig = import ./nixpkgs-config.nix;
 
-  sources = import nix/sources.nix;
+  sources = import ./nix/sources.nix;
   overlay = _: pkgs: {
     niv = import sources.niv {};
   };
