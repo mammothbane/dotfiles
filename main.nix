@@ -6,7 +6,6 @@ let
   pkgs = import sources.nixpkgs {
     config = nixpkgsConfig // {};
   };
-  pinnedPkgs = pkgs;
 
   aliases = ''
     alias ll='ls -alF'
@@ -31,10 +30,10 @@ let
   } // local;
 
   pinentry = if localConfig.graphical
-    then pinnedPkgs.pinentry-gnome
+    then pkgs.pinentry-gnome
     else pkgs.pinentry;
 
-  graphicalPackages = with pinnedPkgs; with ownpkgs; [
+  graphicalPackages = with pkgs; with ownpkgs; [
     discord
     minecraft
 
@@ -80,7 +79,7 @@ in
       python3
       python3.pkgs.pip
 
-      pinnedPkgs.elixir_1_10
+      pkgs.elixir_1_10
 
       pinentry
     ]
