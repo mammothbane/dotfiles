@@ -43,6 +43,11 @@ let
     # yubioath-desktop -- broken
   ];
 
+  graphicalPrograms = {
+    # obs-studio = {};
+
+  };
+
 in
 {
   nixpkgs.config = nixpkgsConfig;
@@ -79,7 +84,7 @@ in
       python3
       python3.pkgs.pip
 
-      pkgs.elixir_1_10
+      elixir_1_10
 
       pinentry
     ]
@@ -142,19 +147,6 @@ in
       highlightBaseName = true;
     };
 
-    keychain = {
-      enable = false;
-      agents = [
-        "gpg"
-        "ssh"
-      ];
-      inheritType = "any";
-      extraFlags = [
-        "--gpg2"
-        "--systemd"
-      ];
-    };
-
     lesspipe.enable = true;
 
     readline = {
@@ -167,7 +159,7 @@ in
 
     ssh = {
       enable = true;
-      controlMaster = "auto";
+      # controlMaster = "auto";
       controlPersist = "10m";
       forwardAgent = true;
 
@@ -240,17 +232,29 @@ in
       };
     };
 
+    keychain = {
+      enable = false;
+      agents = [
+        "gpg"
+        "ssh"
+      ];
+      inheritType = "any";
+      extraFlags = [
+        "--gpg2"
+        "--systemd"
+      ];
+    };
+
     # TODO
     irssi = {};
     notmuch = {};
-    # obs-studio = {};
     starship = {};
   };
 
   services = {
     gpg-agent = {
       enable = true;
-      # enableExtraSocket = true;
+      enableExtraSocket = true;
       enableSshSupport = true;
       enableScDaemon = true;
       defaultCacheTtl = 60;
@@ -280,7 +284,6 @@ in
     };
 
     sessionVariables = {
-      # TODO: SSH_AUTH_SOCK?
     };
 
     startServices = true;
