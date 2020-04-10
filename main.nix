@@ -165,12 +165,16 @@ in
       forwardAgent = true;
 
       matchBlocks = let
-        viaProxy = { host, user }: {
-          "${host}" = {
+        viaProxy = { host, user, name ? null }: let
+          config = {
             inherit user;
+            hostname = host;
             proxyJump = "vpn.tulip.co";
           };
-        };
+        in
+
+        { "${host}" = config; }
+          // (if name != null then { "${name}" = config; } else {});
 
         nonProxied = {
           "somali-derp.com" = {
@@ -183,8 +187,9 @@ in
         };
 
         proxied = [
-          { user = "ubuntu"; host = "deploy.bulb.cloud"; }
-          { user = "ubuntu"; host = "deploy.tulip.co"; }
+          { user = "ubuntu"; host = "deploy.bulb.cloud"; name = "tulip-staging"; }
+          { user = "ubuntu"; host = "deploy.tulip.co"; name = "tulip-prod"; }
+          { user = "ubuntu"; host = "deploy-eu-central-1.dmgmori-tulipintra.net"; name = "tulip-dmgm"; }
         ];
       in
       pkgs.lib.foldl (acc: x: acc // (viaProxy x))
