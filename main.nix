@@ -45,7 +45,6 @@ let
 
   graphicalPrograms = {
     # obs-studio = {};
-
   };
 
 in
@@ -61,6 +60,8 @@ in
       key_bindings = [
       ];
     };
+
+    "autostart/gnome-keyring-ssh.desktop".source = ./override/gnome-keyring-ssh.desktop;
   };
 
   home = {
@@ -284,6 +285,7 @@ in
     };
 
     sessionVariables = {
+      GSM_SKIP_SSH_AGENT_WORKAROUND = "1";
     };
 
     startServices = true;
