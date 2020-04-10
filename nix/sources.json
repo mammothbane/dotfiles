@@ -1,4 +1,76 @@
 {
+    "darcula": {
+        "branch": "master",
+        "description": "VIM Darcula Theme",
+        "homepage": null,
+        "owner": "blueshirts",
+        "repo": "darcula",
+        "rev": "92e8f51d82b36fc6cca148eb98dd3e4cfacc92cd",
+        "sha256": "0jfkzha1rfj9vj13fyfwsnqdlw92xmyd7n21g8ysnwvj7n341bls",
+        "type": "tarball",
+        "url": "https://github.com/blueshirts/darcula/archive/92e8f51d82b36fc6cca148eb98dd3e4cfacc92cd.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
+    "ncm2-alchemist": {
+        "branch": "master",
+        "description": "ncm2 source for alchemist.vim plugin",
+        "homepage": "",
+        "owner": "pbogut",
+        "repo": "ncm2-alchemist",
+        "rev": "b7790f3acbb7d0bb8eebdec69e88c692a3110874",
+        "sha256": "1rigaaas512bql9skav8vs9ax1pbvkqzhi6c9s91lww40mq75wbp",
+        "type": "tarball",
+        "url": "https://github.com/pbogut/ncm2-alchemist/archive/b7790f3acbb7d0bb8eebdec69e88c692a3110874.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
+    "ncm2-go": {
+        "branch": "master",
+        "description": null,
+        "homepage": null,
+        "owner": "ncm2",
+        "repo": "ncm2-go",
+        "rev": "ca525bda6cb93248059422129dec717daa263e89",
+        "sha256": "19xyi3b3dpl9pvh32b39sg8hnck1g55i4z51v0ak275yrq4minrk",
+        "type": "tarball",
+        "url": "https://github.com/ncm2/ncm2-go/archive/ca525bda6cb93248059422129dec717daa263e89.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
+    "ncm2-pyclang": {
+        "ref": "master",
+        "repo": "git@github.com:ncm2/ncm2-pyclang",
+        "rev": "7ea775d5ff2742f66566d8912bdf873f103e3b26",
+        "type": "git"
+    },
+    "ncm2-racer": {
+        "branch": "master",
+        "description": null,
+        "homepage": null,
+        "owner": "ncm2",
+        "repo": "ncm2-racer",
+        "rev": "e3aec0836ea1ff1b820e937f9c6463eb015fa784",
+        "sha256": "03vd252qm6b3isd45jz7wah3p9sm73pf4gxngwsfb1hc1hn7c1cf",
+        "type": "tarball",
+        "url": "https://github.com/ncm2/ncm2-racer/archive/e3aec0836ea1ff1b820e937f9c6463eb015fa784.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
+    "ncm2-tern": {
+        "ref": "master",
+        "repo": "git@github.com:ncm2/ncm2-tern",
+        "rev": "04febdd474ca586fff16accb1b5b268c2dde282e",
+        "type": "git"
+    },
+    "ncm2-typescript": {
+        "ref": "master",
+        "repo": "git@github.com:mhartington/nvim-typescript",
+        "rev": "cb325b5273e1eba4e8536fdf211a4d7e49b5d6f9",
+        "type": "git"
+    },
+    "ncm2-vim": {
+        "ref": "master",
+        "repo": "git@github.com:ncm2/ncm2-vim",
+        "rev": "4ee5d3e8b5710890cb5da7875790bdd5a8b3ca07",
+        "type": "git"
+    },
     "nixpkgs": {
         "branch": "master",
         "description": "Nix Packages collection",
@@ -21,6 +93,18 @@
         "sha256": "0189sz67ixzrlvbvz1w9f7gs0kflsa7p6031iqrxxnqj1p467362",
         "type": "tarball",
         "url": "https://github.com/mammothbane/nixpkgs-own/archive/7f2f290ea5af6dfbd0245863efce3fae31b506ad.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
+    "vim-mix-format": {
+        "branch": "master",
+        "description": "Vim integration for the Elixir formatter.",
+        "homepage": "",
+        "owner": "mhinz",
+        "repo": "vim-mix-format",
+        "rev": "cbb63e65a423ea63444a5d1b41e51d1fcec5f962",
+        "sha256": "037fbmcj9dfj89jd2xa1xv55baqvws85xpjmypgr3kx7y183l0b7",
+        "type": "tarball",
+        "url": "https://github.com/mhinz/vim-mix-format/archive/cbb63e65a423ea63444a5d1b41e51d1fcec5f962.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     }
 }

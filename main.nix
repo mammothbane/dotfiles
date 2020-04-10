@@ -38,6 +38,8 @@ let
     discord
     minecraft
 
+    alacritty
+
     yubikey-personalization
     # yubioath-desktop -- broken
   ];
@@ -45,7 +47,17 @@ let
 in
 {
   nixpkgs.config = nixpkgsConfig;
-  xdg.configFile."nixpkgs/config.nix".source = ./nixpkgs-config.nix;
+  xdg.configFile = {
+    "nixpkgs/config.nix".source = ./nixpkgs-config.nix;
+
+    "alacrity/alacritty.yml".text = builtins.toJSON {
+      window.dimensions = {
+      };
+
+      key_bindings = [
+      ];
+    };
+  };
 
   home = {
     stateVersion = "19.09";
@@ -66,7 +78,6 @@ in
       glibcLocales
 
       python3
-      python3.pkgs.pynvim
       python3.pkgs.pip
 
       pinnedPkgs.elixir_1_10
@@ -77,8 +88,8 @@ in
 
     sessionVariables = {
       GCC_COLORS = "error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01";
-      EDITOR = "vim";
-      VISUAL = "vim";
+      EDITOR = "nvim";
+      VISUAL = "nvim";
       KEYTIMEOUT = 1;
       NIX_PATH = "$HOME/.nix-defexpr/channels:$NIX_PATH";
       LOCALE_ARCHIVE = "${pkgs.glibcLocales}/lib/locale/locale-archive";
@@ -91,7 +102,7 @@ in
 
   programs = {
     home-manager.enable = true;
-    vim = import ./vim.nix { inherit pkgs; };
+    neovim = import ./vim.nix { inherit pkgs sources; };
     git = import ./git.nix { inherit pkgs; };
 
     direnv = {
@@ -232,7 +243,6 @@ in
 
     # TODO
     irssi = {};
-    # kitty = {};
     notmuch = {};
     # obs-studio = {};
     starship = {};
