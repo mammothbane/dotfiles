@@ -1,12 +1,12 @@
-{ pkgs }:
 { localConfigFile ? ./local.nix }:
 let
   nixpkgsConfig = import ./nixpkgs-config.nix;
 
   sources = import ./nix/sources.nix;
-  pinnedPkgs = import sources.nixpkgs {
+  pkgs = import sources.nixpkgs {
     config = nixpkgsConfig // {};
   };
+  pinnedPkgs = pkgs;
 
   aliases = ''
     alias ll='ls -alF'

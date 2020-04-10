@@ -36,10 +36,16 @@
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "ncm2-pyclang": {
-        "ref": "master",
-        "repo": "git@github.com:ncm2/ncm2-pyclang",
+        "branch": "master",
+        "description": "Cached, fast C/C++ completion for ncm2",
+        "homepage": "",
+        "owner": "ncm2",
+        "repo": "ncm2-pyclang",
         "rev": "7ea775d5ff2742f66566d8912bdf873f103e3b26",
-        "type": "git"
+        "sha256": "0wdd5lg9ds8dy6chfm8dhfxw0si01hpis2br2mamihqvzmc2lhc5",
+        "type": "tarball",
+        "url": "https://github.com/ncm2/ncm2-pyclang/archive/7ea775d5ff2742f66566d8912bdf873f103e3b26.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "ncm2-racer": {
         "branch": "master",
@@ -54,22 +60,40 @@
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "ncm2-tern": {
-        "ref": "master",
-        "repo": "git@github.com:ncm2/ncm2-tern",
+        "branch": "master",
+        "description": "ternjs based javascript completion for ncm2",
+        "homepage": "",
+        "owner": "ncm2",
+        "repo": "ncm2-tern",
         "rev": "04febdd474ca586fff16accb1b5b268c2dde282e",
-        "type": "git"
+        "sha256": "06qmy3pjkwma9m88yw7zb37x42sf1mb855a07as1rjl57zxixm0m",
+        "type": "tarball",
+        "url": "https://github.com/ncm2/ncm2-tern/archive/04febdd474ca586fff16accb1b5b268c2dde282e.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "ncm2-typescript": {
-        "ref": "master",
-        "repo": "git@github.com:mhartington/nvim-typescript",
+        "branch": "master",
+        "description": "Typescript tooling for Neovim",
+        "homepage": "",
+        "owner": "mhartington",
+        "repo": "nvim-typescript",
         "rev": "cb325b5273e1eba4e8536fdf211a4d7e49b5d6f9",
-        "type": "git"
+        "sha256": "0bbbj25jhdx0ls2d7p9ir54hmdxvql9kn3hid1s4h963ww1mah0j",
+        "type": "tarball",
+        "url": "https://github.com/mhartington/nvim-typescript/archive/cb325b5273e1eba4e8536fdf211a4d7e49b5d6f9.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "ncm2-vim": {
-        "ref": "master",
-        "repo": "git@github.com:ncm2/ncm2-vim",
+        "branch": "master",
+        "description": "vim source for ncm2",
+        "homepage": null,
+        "owner": "ncm2",
+        "repo": "ncm2-vim",
         "rev": "4ee5d3e8b5710890cb5da7875790bdd5a8b3ca07",
-        "type": "git"
+        "sha256": "0m4rs2bs0j74l7gqyzcdhprvvx2n7hw64bbls877av6kix4azr31",
+        "type": "tarball",
+        "url": "https://github.com/ncm2/ncm2-vim/archive/4ee5d3e8b5710890cb5da7875790bdd5a8b3ca07.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "nixpkgs": {
         "branch": "master",
@@ -77,10 +101,10 @@
         "homepage": null,
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "fe6302c7fa298770fa56196979b32c8e97ddf484",
-        "sha256": "1zsg1l5hw7cxlx16j5izjg3aqfkpqyv3df9gadw7vdqvm9556dk9",
+        "rev": "2f2c44b936e67fbfbfb00fd4697e4230c066649e",
+        "sha256": "0iv0fa0w3w13rjhppvrw40gwzvnhaj9jx0p86cq592wmp4qz5bkq",
         "type": "tarball",
-        "url": "https://github.com/nixos/nixpkgs/archive/fe6302c7fa298770fa56196979b32c8e97ddf484.tar.gz",
+        "url": "https://github.com/nixos/nixpkgs/archive/2f2c44b936e67fbfbfb00fd4697e4230c066649e.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "ownpkgs": {
