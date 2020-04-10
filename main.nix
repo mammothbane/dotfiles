@@ -160,25 +160,36 @@ in
 
     ssh = {
       enable = true;
-      # controlMaster = "auto";
+      controlMaster = "auto";
       controlPersist = "10m";
       forwardAgent = true;
 
-      matchBlocks = {
-        "somali-derp.com" = {
-          user = "mammothbane";
+      matchBlocks = let
+        viaProxy = { host, user }: {
+          "${host}" = {
+            inherit user;
+            proxyJump = "vpn.tulip.co";
+          };
         };
 
-        "deploy.bulb.cloud" = {
-          user = "ubuntu";
-          proxyJump = "vpn.tulip.co";
+        nonProxied = {
+          "somali-derp.com" = {
+            user = "mammothbane";
+          };
+
+          "vpn.tulip.co" = {
+            user = "developer";
+          };
         };
 
-        "deploy.tulip.co" = {
-          user = "ubuntu";
-          proxyJump = "vpn.tulip.co";
-        };
-      };
+        proxied = [
+          { user = "ubuntu"; host = "deploy.bulb.cloud"; }
+          { user = "ubuntu"; host = "deploy.tulip.co"; }
+        ];
+      in
+      pkgs.lib.foldl (acc: x: acc // (viaProxy x))
+        nonProxied
+        proxied;
 
       extraConfig = ''
       '';
