@@ -60,9 +60,11 @@ in
       key_bindings = [
       ];
     };
-
-    "autostart/gnome-keyring-ssh.desktop".source = ./override/gnome-keyring-ssh.desktop;
-  };
+  } // (
+    let 
+      overrides = builtins.attrNames (builtins.readDir ./override/xdg-config);
+    in pkgs.lib.foldl (acc: x: acc // { "${x}" = { recursive = true; source = ./override/xdg-config + "/${x}"; }; }) {} overrides
+  );
 
   home = {
     stateVersion = "19.09";
@@ -86,6 +88,8 @@ in
       python3.pkgs.pip
 
       elixir_1_10
+
+      gocode
 
       pinentry
     ]
