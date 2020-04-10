@@ -98,6 +98,7 @@ in
       KEYTIMEOUT = 1;
       NIX_PATH = "$HOME/.nix-defexpr/channels:$NIX_PATH";
       LOCALE_ARCHIVE = "${pkgs.glibcLocales}/lib/locale/locale-archive";
+      SSH_AUTH_SOCK = "\${SSH_AUTH_SOCK:-$(${pkgs.gnupg}/bin/gpgconf --list-dirs agent-ssh-socket)}";
 
       PATH = "$PATH:$HOME/bin";
     };
