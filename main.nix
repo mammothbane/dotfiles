@@ -16,6 +16,10 @@ let
     alias rs="exec -l $SHELL"
 
     alias hm=home-manager
+
+    ops() {
+      eval $(op signin "$1")
+    }
   '';
 
   ownpkgs-root  = pkgs.callPackage sources.ownpkgs {};
@@ -87,13 +91,19 @@ in
       nmap
       yaml2json
 
+      _1password
+
+      nix-index
       haskellPackages.niv
+
       cordless
 
       glibcLocales
 
       python3
       python3.pkgs.pip
+
+      rustup
 
       elixir_1_10
 
