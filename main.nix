@@ -34,7 +34,7 @@ let
   } // local;
 
   pinentry = if localConfig.graphical
-    then pkgs.pinentry-gnome
+    then pkgs.pinentry_qt5
     else pkgs.pinentry;
 
   graphicalPackages = with pkgs; with ownpkgs; [
@@ -53,8 +53,7 @@ let
     # obs-studio = {};
   };
 
-in
-{
+in {
   nixpkgs.config = nixpkgsConfig;
   xdg.configFile = {
     "nixpkgs/config.nix".source = ./nixpkgs-config.nix;
@@ -89,6 +88,7 @@ in
       wget
       youtube-dl
       nmap
+      gnupg
       yaml2json
 
       _1password
@@ -97,6 +97,7 @@ in
       haskellPackages.niv
 
       cordless
+      ncspot
 
       glibcLocales
 
