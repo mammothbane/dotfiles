@@ -40,7 +40,9 @@ let
     alacritty
 
     yubikey-personalization
-    # yubioath-desktop -- broken
+    yubioath-desktop
+
+    slack
   ];
 
   graphicalPrograms = {
@@ -83,6 +85,7 @@ in
       wget
       youtube-dl
       nmap
+      yaml2json
 
       haskellPackages.niv
       cordless
@@ -105,7 +108,7 @@ in
       EDITOR = "nvim";
       VISUAL = "nvim";
       KEYTIMEOUT = 1;
-      NIX_PATH = "$HOME/.nix-defexpr/channels:$NIX_PATH";
+      NIX_PATH = "$HOME/.nix-defexpr/channels";
       LOCALE_ARCHIVE = "${pkgs.glibcLocales}/lib/locale/locale-archive";
 
       PATH = "$PATH:$HOME/bin";
