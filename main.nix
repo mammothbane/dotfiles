@@ -17,6 +17,10 @@ let
 
     alias hm=home-manager
 
+    sys() {
+      PATH="/run/current-system/sw/bin:/run/current-system/sw/sbin" $@
+    }
+
     ops() {
       eval $(op signin "$1")
     }
@@ -25,6 +29,7 @@ let
   ownpkgs-root  = pkgs.callPackage sources.ownpkgs {};
   ownpkgs       = ownpkgs-root.pkgs;
   ownlib        = ownpkgs-root.lib;
+  homepkgs      = pkgs.callPackage ./pkgs {};
 
   localConfig = with ownlib; let
     tryLocal  = tryCallPackage localConfigFile {};
@@ -39,6 +44,8 @@ let
 
   graphicalPackages = with pkgs; with ownpkgs; [
     discord
+    slack
+
     minecraft
 
     alacritty
@@ -49,8 +56,6 @@ let
 
     yubikey-personalization
     yubioath-desktop
-
-    slack
   ];
 
   graphicalPrograms = {
@@ -100,7 +105,43 @@ in {
       nmap
       gnupg
       yaml2json
+      coreutils
       unzip
+      bash
+      less
+      file
+      binutils
+      which
+      gnugrep
+      gnutar
+      openssh
+      patchelf
+      findutils
+      gawk
+      utillinux
+      bzip2
+      e2fsprogs
+      diffutils
+      flock
+      acl
+      gzip
+      inetutils
+      iproute
+      iputils
+      kmod
+      dosfstools
+      ntfs3g
+      netcat-gnu
+      gnupatch
+      procps
+      rr
+      gdb
+      gnused
+      strace
+      linuxPackages.perf
+      sudo
+      lzma
+      gzip
 
       _1password
 
@@ -113,15 +154,17 @@ in {
       glibcLocales
 
       python3
-      python3.pkgs.pip
-
       rustup
-
       elixir_1_10
 
       gocode
 
       pinentry
+
+      nix
+
+      homepkgs.tulip.dump
+      homepkgs.tulip.restore
     ]
     ++ pkgs.lib.optionals localConfig.graphical graphicalPackages;
 
@@ -130,10 +173,10 @@ in {
       EDITOR = "nvim";
       VISUAL = "nvim";
       KEYTIMEOUT = 1;
-      NIX_PATH = "$HOME/.nix-defexpr/channels";
+      NIX_PATH = "$HOME/.nix-defexpr/channels:nixos-config=/etc/nixos/configuration.nix";
       LOCALE_ARCHIVE = "${pkgs.glibcLocales}/lib/locale/locale-archive";
-
-      PATH = "$PATH:$HOME/bin";
+      PATH = "$HOME/.nix-profile/bin:$HOME/.nix-profile/sbin";
+      PAGER = "${pkgs.less}/bin/less";
     };
   };
 

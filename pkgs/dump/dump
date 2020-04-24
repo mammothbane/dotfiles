@@ -1,0 +1,89 @@
+# vim: set ft=sh
+set -euo pipefail
+
+DUMP_RESTORE_PATH=$HOME/oshi
+mkdir -p "$DUMP_RESTORE_PATH"
+
+dump=$(mktemp -d)
+
+logs_dir=$(mktemp -d)
+mkdir -p "$logs_dir"
+
+echo $logs_dir
+
+pids=()
+names=()
+ok=0
+
+run() {
+    name=$1
+    shift
+
+    "$@" 2>"$logs_dir/$name.stderr" 1>"$logs_dir/$name.stdout" &
+    pids+=($!)
+    names+=("$name")
+}
+
+cleanup() {
+    rm -rf "$dump" || true
+
+    status=$?
+    [ $ok -ne 0 ] && exit $status
+
+    for pid in "''${pids[@]}"; do
+        kill -9 "$pid"
+    done
+
+    exit $status
+}
+
+trap cleanup EXIT
+
+run "mongodump" mongodump \
+    --host='localhost:19100' \
+    --db factory \
+    --out "$dump/mongo" \
+    --readPreference secondaryPreferred
+
+export PGPASSWORD=admin
+
+run "pg_schema" pg_dump \
+    --verbose \
+    --host=localhost \
+    --port=19101 \
+    --dbname=factory \
+    --username=admin \
+    --format=custom \
+    --file="$dump/pg-schema.dump" \
+    --schema=public \
+    --schema-only
+
+run "pg_data" pg_dump \
+    --verbose \
+    --host=localhost \
+    --port=19101 \
+    --dbname=factory \
+    --username=admin \
+    --format=custom \
+    --file="$dump/pg-data.dump" \
+    --schema=public \
+    --data-only
+
+
+waits_ok=1
+
+for pid in "''${pids[@]}"; do
+    wait "$pid" || waits_ok=0
+done
+
+ok=1
+
+if [ "$waits_ok" -eq 0 ]; then
+    echo "something went wrong. see logs in $logs_dir."
+    exit 1
+fi
+
+rm -rf "$logs_dir"
+
+tar czf "$DUMP_RESTORE_PATH/$(date -u +%Y-%m-%d-%H%M%S).tar.gz" -C "$dump" "."
+rm -rf "$dump"

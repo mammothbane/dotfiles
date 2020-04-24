@@ -1,0 +1,118 @@
+# vim: set ft=sh :
+set -euo pipefail
+
+logs_dir=$(mktemp -d)
+mkdir -p "$logs_dir"
+
+pids=()
+names=()
+ok=0
+
+run() {
+    name=$1
+    shift
+
+    "$@" 2>"$logs_dir/$name.stderr" 1>"$logs_dir/$name.stdout" &
+    pids+=($!)
+    names+=("$name")
+}
+
+cleanup() {
+    status=$?
+    [ $ok -ne 0 ] && exit $status
+
+    for pid in "${pids[@]}"; do
+        kill -9 "$pid"
+    done
+
+    exit $status
+}
+
+trap cleanup EXIT
+
+dump=$(mktemp -d)
+tar xz -C "$dump" -f - <&0
+
+run "mongo_restore" "mongorestore" \
+    --host='localhost:19100' \
+    --db factory \
+    --drop \
+    "$dump/mongo/factory"
+
+
+postgres() {
+    export PGPASSWORD=admin
+
+    "psql" \
+        --host=localhost \
+        --port=19101 \
+        --dbname=factory \
+        --username=admin \
+        <<EOF
+    DROP SCHEMA IF EXISTS public CASCADE;
+    CREATE SCHEMA IF NOT EXISTS public;
+EOF
+
+    "pg_restore" \
+        --verbose \
+        --host=localhost \
+        --port=19101 \
+        --dbname=factory \
+        --username=admin \
+        --no-owner \
+        --no-acl \
+        --clean \
+        --if-exists \
+        --schema=public \
+        "$dump/pg-schema.dump"
+
+    "pg_restore" \
+        --verbose \
+        --host=localhost \
+        --port=19101 \
+        --dbname=factory \
+        --username=admin \
+        --no-owner \
+        --no-acl \
+        --schema=public \
+        "$dump/pg-data.dump"
+
+    "psql" \
+        --host=localhost \
+        --port=19101 \
+        --dbname=factory \
+        --username=admin \
+        <<EOF
+            GRANT CONNECT ON DATABASE factory TO factory_ro;
+            GRANT usage on schema public to factory_ro;
+            GRANT SELECT ON ALL TABLES IN SCHEMA public TO factory_ro;
+
+            GRANT CONNECT ON DATABASE factory TO factory_rw;
+            GRANT usage on schema public to factory_rw;
+
+            GRANT ALL ON ALL TABLES IN SCHEMA public TO factory_rw;
+            GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA public TO factory_rw;
+            GRANT EXECUTE ON ALL FUNCTIONS IN SCHEMA public TO factory_rw;
+            GRANT CREATE ON SCHEMA public TO factory_rw;
+
+            ALTER DATABASE factory OWNER TO factory_rw;
+            REASSIGN OWNED BY admin TO factory_rw;
+EOF
+}
+
+run "postgres" postgres
+
+waits_ok=1
+
+for pid in "${pids[@]}"; do
+    wait "$pid" || waits_ok=0
+done
+
+ok=1
+
+if [ "$waits_ok" -eq 0 ]; then
+    echo "something went wrong. see logs in $logs_dir."
+    exit 1
+fi
+
+rm -rf "$logs_dir"
