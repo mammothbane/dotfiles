@@ -181,6 +181,13 @@ in {
       "fusermount3"
       "dbus-daemon-launch-helper"
     ]
+    ++ (with import <nixpkgs/nixos> { configuration = {}; }; with config.system.build; [
+      nixos-generate-config
+      nixos-install
+      nixos-enter
+      nixos-rebuild
+      manual.manpages
+    ])
     ++ pkgs.lib.optionals localConfig.graphical graphicalPackages;
 
     sessionVariables = {
