@@ -18,7 +18,7 @@ let
     alias hm=home-manager
 
     sys() {
-      PATH="/run/current-system/sw/bin:/run/current-system/sw/sbin" $@
+      PATH="/run/wrappers/bin:/run/current-system/sw/bin:/run/current-system/sw/sbin" $@
     }
 
     ops() {
@@ -144,6 +144,7 @@ in {
 
       _1password
 
+      nix
       nix-index
       haskellPackages.niv
 
@@ -159,8 +160,6 @@ in {
       gocode
 
       pinentry
-
-      nix
 
       homepkgs.tulip.dump
       homepkgs.tulip.restore
