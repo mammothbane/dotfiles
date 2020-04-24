@@ -139,7 +139,6 @@ in {
       gnused
       strace
       linuxPackages.perf
-      sudo
       lzma
       gzip
 
@@ -165,6 +164,22 @@ in {
 
       homepkgs.tulip.dump
       homepkgs.tulip.restore
+    ]
+    ++ homepkgs.wrapSetuids [
+      "sudo"
+      "sudoedit"
+      "su"
+      "passwd"
+      "newgrp"
+      "newuidmap"
+      "newgidmap"
+      "sg"
+      "start_kdeinit"
+      "unix_chkpwd"
+      "kcheckpass"
+      "fusermount"
+      "fusermount3"
+      "dbus-daemon-launch-helper"
     ]
     ++ pkgs.lib.optionals localConfig.graphical graphicalPackages;
 
