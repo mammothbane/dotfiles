@@ -141,6 +141,7 @@ in {
       linuxPackages.perf
       lzma
       gzip
+      systemd
 
       _1password
 
