@@ -25,6 +25,8 @@
     bs = "!bname=\"$(git bn)\" && git branch --set-upstream-to=origin/$bname $bname";
     tracked = "!git rev-parse --abbrev-ref --symbolic-full-name @{u} > /dev/null 2>&1";
 
+    detach = "!git checkout $(git rev-parse HEAD)";
+
     g     = "graph";
     graph = "log --graph  --decorate --all --date-order --pretty=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all";
 
@@ -33,7 +35,7 @@
 
   signing = {
     key = "2E4DE058CFDBB6F4";
-    signByDefault = true;
+    signByDefault = false;
   };
 
   ignores = [
@@ -54,5 +56,6 @@
     push.default = "current";
     pull.rebase = true;
     credential.helper = "cache";
+    advice.detachedHead = false;
   };
 }

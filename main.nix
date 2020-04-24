@@ -43,6 +43,10 @@ let
 
     alacritty
 
+    spotify
+
+    shutter
+
     yubikey-personalization
     yubioath-desktop
 
@@ -54,7 +58,13 @@ let
   };
 
 in {
-  nixpkgs.config = nixpkgsConfig;
+  nixpkgs = {
+    config = nixpkgsConfig;
+    overlays = [
+      (self: super: pkgs)
+    ];
+  };
+
   xdg.configFile = {
     "nixpkgs/config.nix".source = ./nixpkgs-config.nix;
 
@@ -90,6 +100,7 @@ in {
       nmap
       gnupg
       yaml2json
+      unzip
 
       _1password
 
@@ -212,6 +223,7 @@ in {
         proxied = [
           { user = "ubuntu"; host = "deploy.bulb.cloud"; name = "tulip-staging"; }
           { user = "ubuntu"; host = "deploy.tulip.co"; name = "tulip-prod"; }
+          { user = "ubuntu"; host = "deploy-eu-central-1.tulipintra.net"; name = "tulip-eu"; }
           { user = "ubuntu"; host = "deploy-eu-central-1.dmgmori-tulipintra.net"; name = "tulip-dmgm"; }
         ];
       in
