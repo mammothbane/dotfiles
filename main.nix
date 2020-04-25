@@ -59,7 +59,7 @@ let
   ];
 
   graphicalPrograms = {
-    # obs-studio = {};
+    obs-studio = { enable = true; };
   };
 
 in {
@@ -148,6 +148,7 @@ in {
       nix
       nix-index
       haskellPackages.niv
+      arion
 
       cordless
       ncspot
@@ -157,6 +158,7 @@ in {
       python3
       rustup
       elixir_1_10
+      ghc
 
       gocode
 
@@ -366,7 +368,7 @@ in {
     irssi = {};
     notmuch = {};
     starship = {};
-  };
+  } // pkgs.lib.optionalAttrs localConfig.graphical graphicalPrograms;
 
   services = {
     gpg-agent = {
