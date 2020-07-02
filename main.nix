@@ -142,6 +142,9 @@ in {
       lzma
       gzip
       systemd
+      dos2unix
+
+      openssl
 
       _1password
 
@@ -159,6 +162,7 @@ in {
       rustup
       elixir_1_10
       ghc
+      ((import sources.all-hies {}).selection { selector = p: { inherit (p) ghc864 ghc865; }; })
 
       gocode
 

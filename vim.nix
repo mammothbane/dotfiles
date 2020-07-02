@@ -62,7 +62,10 @@ in
     vim-toml
     kotlin-vim
     julia-vim
+
     haskell-vim
+    vim-hindent
+    stylish-haskell
 
     vim-javascript
     typescript-vim
