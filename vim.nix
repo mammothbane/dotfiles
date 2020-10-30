@@ -25,10 +25,12 @@
 
     rust-vim
     vim-go
-    vim-nix
-    vim-toml
     kotlin-vim
     julia-vim
+
+    vim-nix
+    vim-toml
+    vim-terraform
 
     haskell-vim
     vim-hindent

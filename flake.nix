@@ -20,6 +20,16 @@
       flake = false;
     };
 
+    neuron = {
+      url = "github:srid/neuron/master";
+      flake = false;
+    };
+
+    cachix = {
+      url = "github:cachix/cachix/master";
+      flake = false;
+    };
+
 
     darcula = {
       url = "github:blueshirts/darcula/master";
@@ -74,10 +84,19 @@
         config = import ./nixpkgs-config.nix;
       };
 
+      composeOverlays = builtins.foldl' pkgs.lib.composeExtensions (self: super: {});
+
     in {
-      overlay = import ./vim-plugins.nix {
-        inherit (inputs) darcula ncm2-alchemist ncm2-go ncm2-pyclang ncm2-racer ncm2-tern nvim-typescript ncm2-vim vim-mix-format;
-      };
+      overlay = composeOverlays [
+        (import ./vim-plugins.nix {
+          inherit (inputs) darcula ncm2-alchemist ncm2-go ncm2-pyclang ncm2-racer ncm2-tern nvim-typescript ncm2-vim vim-mix-format;
+        })
+
+        (self: super: {
+          cachix = import inputs.cachix;
+          neuron = import inputs.neuron {};
+        })
+      ];
 
       lib.mkActivator = { username, homeDirectory }: (inputs.home-manager.lib.homeManagerConfiguration {
         configuration = {

@@ -1,5 +1,22 @@
 {
   "nodes": {
+    "cachix": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1603364695,
+        "narHash": "sha256-SFS0ejMW7uAHnEt+tJaFZoM0O87t04YEOlEYCO+Ek8w=",
+        "owner": "cachix",
+        "repo": "cachix",
+        "rev": "633e3f787bcb5055f20eda3b2f3b219124980c06",
+        "type": "github"
+      },
+      "original": {
+        "owner": "cachix",
+        "ref": "master",
+        "repo": "cachix",
+        "type": "github"
+      }
+    },
     "darcula": {
       "flake": false,
       "locked": {
@@ -172,6 +189,23 @@
         "type": "github"
       }
     },
+    "neuron": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1604012913,
+        "narHash": "sha256-pHLSSRhc9FAjhBT1hb/lxgvuDknFZfD282Bci1o+KdA=",
+        "owner": "srid",
+        "repo": "neuron",
+        "rev": "0a1e94edcd30919842a3616b4987bc458f88533a",
+        "type": "github"
+      },
+      "original": {
+        "owner": "srid",
+        "ref": "master",
+        "repo": "neuron",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1604014297,
@@ -224,6 +258,7 @@
     },
     "root": {
       "inputs": {
+        "cachix": "cachix",
         "darcula": "darcula",
         "flake-util": "flake-util",
         "hies": "hies",
@@ -234,6 +269,7 @@
         "ncm2-racer": "ncm2-racer",
         "ncm2-tern": "ncm2-tern",
         "ncm2-vim": "ncm2-vim",
+        "neuron": "neuron",
         "nixpkgs": "nixpkgs",
         "nvim-typescript": "nvim-typescript",
         "ownpkgs": "ownpkgs",

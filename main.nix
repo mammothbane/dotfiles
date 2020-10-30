@@ -22,6 +22,10 @@ let
     hmu() {
       nix run --impure github:mammothbane/dotfiles/master
     }
+
+    neuron() {
+      command neuron -d "$HOME/.local/neuron" "$@"
+    }
   '';
 
   homepkgs      = pkgs.callPackage ./pkgs {};
@@ -111,7 +115,7 @@ in {
       yaml2json
       coreutils
       unzip
-      bash
+      bashInteractive
       less
       file
       binutils
@@ -146,16 +150,18 @@ in {
       lzma
       gzip
       systemd
+      cmake
       dos2unix
 
       openssl
 
       _1password
+      # neuron
 
       nixUnstable
       nix-index
-      haskellPackages.niv
       arion
+      # cachix
 
       cordless
       ncspot
@@ -269,7 +275,7 @@ in {
 
     ssh = {
       enable = true;
-      controlMaster = "auto";
+      controlMaster = "no";
       controlPersist = "10m";
       forwardAgent = true;
 
