@@ -1,11 +1,7 @@
-{ localConfigFile ? ./local.nix }:
+{ pkgs, localConfigFile ? ./local.nix, ... }:
+
 let
   nixpkgsConfig = import ./nixpkgs-config.nix;
-
-  sources = import ./nix/sources.nix;
-  pkgs = import sources.nixpkgs {
-    config = nixpkgsConfig // {};
-  };
 
   aliases = ''
     alias ll='ls -alF'
@@ -15,8 +11,6 @@ let
     alias xclip='xclip -selection c'
     alias rs="exec -l $SHELL"
 
-    alias hm=home-manager
-
     sys() {
       PATH="/run/wrappers/bin:/run/current-system/sw/bin:/run/current-system/sw/sbin" $@
     }
@@ -24,25 +18,30 @@ let
     ops() {
       eval $(op signin "$1")
     }
+
+    hmu() {
+      nix run --impure github:mammothbane/dotfiles/master
+    }
   '';
 
-  ownpkgs-root  = pkgs.callPackage sources.ownpkgs {};
-  ownpkgs       = ownpkgs-root.pkgs;
-  ownlib        = ownpkgs-root.lib;
   homepkgs      = pkgs.callPackage ./pkgs {};
 
-  localConfig = with ownlib; let
-    tryLocal  = tryCallPackage localConfigFile {};
-    local     = orDefault tryLocal {};
-  in {
+  # localConfig = with ownlib; let
+    # tryLocal  = tryCallPackage localConfigFile {};
+    # local     = orDefault tryLocal {};
+  # in {
+    # graphical = false;
+  # } // local;
+
+  localConfig = {
     graphical = false;
-  } // local;
+  };
 
   pinentry = if localConfig.graphical
     then pkgs.pinentry_qt5
     else pkgs.pinentry;
 
-  graphicalPackages = with pkgs; with ownpkgs; [
+  graphicalPackages = with pkgs; [
     discord
     slack
 
@@ -65,9 +64,6 @@ let
 in {
   nixpkgs = {
     config = nixpkgsConfig;
-    overlays = [
-      (self: super: pkgs)
-    ];
   };
 
   xdg.configFile = {
@@ -88,14 +84,22 @@ in {
   } // (
     let
       overrides = builtins.attrNames (builtins.readDir ./override/xdg-config);
-    in pkgs.lib.foldl (acc: x: acc // { "${x}" = { recursive = true; source = ./override/xdg-config + "/${x}"; }; }) {} overrides
+    in pkgs.lib.foldl' (acc: x: acc // { "${x}" = { recursive = true; source = ./override/xdg-config + "/${x}"; }; }) {} overrides
   );
 
   home = {
-    stateVersion = "19.09";
-    packages = with pkgs; with ownpkgs; [
+    stateVersion = "20.09";
+
+    file."home" = {
+      source = ./override/home;
+      recursive = true;
+      target = ".";
+    };
+
+    packages = with pkgs; [
       jq
       ripgrep
+      fd
       xclip
       iotop
       curl
@@ -148,7 +152,7 @@ in {
 
       _1password
 
-      nix
+      nixUnstable
       nix-index
       haskellPackages.niv
       arion
@@ -162,7 +166,6 @@ in {
       rustup
       elixir_1_10
       ghc
-      ((import sources.all-hies {}).selection { selector = p: { inherit (p) ghc864 ghc865; }; })
 
       gocode
 
@@ -186,14 +189,15 @@ in {
       "fusermount"
       "fusermount3"
       "dbus-daemon-launch-helper"
+      "ping"
     ]
-    ++ (with import <nixpkgs/nixos> { configuration = {}; }; with config.system.build; [
-      nixos-generate-config
-      nixos-install
-      nixos-enter
-      nixos-rebuild
-      manual.manpages
-    ])
+    # ++ (with import <nixpkgs/nixos> { configuration = {}; }; with config.system.build; [
+      # nixos-generate-config
+      # nixos-install
+      # nixos-enter
+      # nixos-rebuild
+      # manual.manpages
+    # ])
     ++ pkgs.lib.optionals localConfig.graphical graphicalPackages;
 
     sessionVariables = {
@@ -201,7 +205,6 @@ in {
       EDITOR = "nvim";
       VISUAL = "nvim";
       KEYTIMEOUT = 1;
-      NIX_PATH = "$HOME/.nix-defexpr/channels:nixos-config=/etc/nixos/configuration.nix";
       LOCALE_ARCHIVE = "${pkgs.glibcLocales}/lib/locale/locale-archive";
       PATH = "$HOME/.nix-profile/bin:$HOME/.nix-profile/sbin";
       PAGER = "${pkgs.less}/bin/less";
@@ -212,7 +215,8 @@ in {
 
   programs = {
     home-manager.enable = true;
-    neovim = import ./vim.nix { inherit pkgs sources; };
+
+    neovim = import ./vim.nix { inherit pkgs; };
     git = import ./git.nix { inherit pkgs; };
 
     direnv = {
@@ -298,7 +302,7 @@ in {
           { user = "ubuntu"; host = "deploy-eu-central-1.dmgmori-tulipintra.net"; name = "tulip-dmgm"; }
         ];
       in
-      pkgs.lib.foldl (acc: x: acc // (viaProxy x))
+      builtins.foldl' (acc: x: acc // (viaProxy x))
         nonProxied
         proxied;
 
@@ -390,7 +394,8 @@ in {
 
     keybase.enable = true;
     lorri.enable = true;
-    # spotifyd.enable = true;
+
+    spotifyd.enable = true;
 
     # TODO(unstable)
     # lieer = {};

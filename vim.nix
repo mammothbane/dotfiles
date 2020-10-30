@@ -1,45 +1,12 @@
-{ pkgs, sources, ... }:
-
-let
-  regularPlugins = [
-    "darcula"
-
-    "vim-mix-format"
-
-    "ncm2-go"
-    "ncm2-racer"
-    "ncm2-alchemist"
-    "ncm2-vim"
-    "ncm2-pyclang"
-    "ncm2-tern"
-  ];
-
-  normalPlugin = name: {
-    "${name}" = pkgs.vimUtils.buildVimPlugin {
-      inherit name;
-      src = sources."${name}";
-    };
-  };
-
-  irregularPlugins = {
-    ncm2-typescript = {
-      name = "ncm2-typescript";
-      src = "${sources.ncm2-typescript}/ncm2-plugin";
-    };
-  };
-
-  customPlugins = pkgs.lib.foldl (acc: x: acc // (normalPlugin x)) irregularPlugins regularPlugins;
-
-in
+{ pkgs }:
 
 {
   enable = true;
 
   vimAlias = true;
   viAlias = true;
-  # vimdiffAlias = true;
 
-  plugins = with pkgs.vimPlugins; with customPlugins; [
+  plugins = with pkgs.vimPlugins; with pkgs.customVimPlugins; [
     vim-sensible
     vim-airline
     vim-airline-themes
@@ -90,7 +57,7 @@ in
 
     LanguageClient-neovim
 
-    # deoplete-nvim
+    deoplete-nvim
   ];
 
   extraConfig = ''
