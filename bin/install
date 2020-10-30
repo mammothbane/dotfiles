@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+exec nix-shell \
+    -I nixpkgs=https://github.com/nixos/nixpkgs/archive/release-20.09.tar.gz \
+    -p nixUnstable \
+    --run 'nix --experimental-features "nix-command flakes" run github:mammothbane/dotfiles --impure'
