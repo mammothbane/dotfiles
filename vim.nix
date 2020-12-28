@@ -17,6 +17,7 @@
     vim-surround
     ctrlp-vim
     vim-unimpaired
+    vim-mundo
 
     darcula
 
@@ -27,10 +28,6 @@
     vim-go
     kotlin-vim
     julia-vim
-
-    vim-nix
-    vim-toml
-    vim-terraform
 
     haskell-vim
     vim-hindent
@@ -43,6 +40,10 @@
     vim-elixir
     alchemist-vim
     vim-mix-format
+
+    vim-nix
+    vim-toml
+    vim-terraform
 
     ncm2
     nvim-yarp
@@ -104,13 +105,11 @@
     autocmd BufEnter * call ncm2#enable_for_buffer()
     set completeopt=noinsert,menuone,noselect
 
-
     "    let g:deoplete#enable_at_startup = 1
     "    call deoplete#custom#option({
     "    \ 'auto_complete_delay': 100,
     "    \ 'smart_case': v:true,
     "    \})
-
 
     set shortmess+=c
 
@@ -124,5 +123,8 @@
 
     let g:NERDSpaceDelims = 1
     map <silent> <C-n> :NERDTreeToggle<CR>
+
+    set undofile
+    set undodir=~/.cache/vim/undo
   '';
 }
