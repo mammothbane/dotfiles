@@ -86,19 +86,7 @@
 
       composeOverlays = builtins.foldl' pkgs.lib.composeExtensions (self: super: {});
 
-    in {
-      overlay = composeOverlays [
-        (import ./vim-plugins.nix {
-          inherit (inputs) darcula ncm2-alchemist ncm2-go ncm2-pyclang ncm2-racer ncm2-tern nvim-typescript ncm2-vim vim-mix-format;
-        })
-
-        (self: super: {
-          cachix = import inputs.cachix;
-          neuron = import inputs.neuron {};
-        })
-      ];
-
-      lib.mkActivator = { username, homeDirectory }: (inputs.home-manager.lib.homeManagerConfiguration {
+      mkActivator = { username, homeDirectory }: (inputs.home-manager.lib.homeManagerConfiguration {
         configuration = {
           nixpkgs.overlays = [
             self.overlay
@@ -112,12 +100,80 @@
         inherit pkgs username homeDirectory;
       }).activationPackage;
 
+    in {
+      overlay = composeOverlays [
+        (import ./vim-plugins.nix {
+          inherit (inputs) darcula ncm2-alchemist ncm2-go ncm2-pyclang ncm2-racer ncm2-tern nvim-typescript ncm2-vim vim-mix-format;
+        })
+
+        (self: super: {
+          cachix = import inputs.cachix;
+          neuron = import inputs.neuron {};
+        })
+      ];
+
+      lib = { inherit mkActivator; };
+
+      nixosModule = ({ config, pkgs, lib, ... }: {
+        environment.systemPackages = [
+          (let
+            users = config.users.users;
+
+            extractName = attrName:
+            let maybeName = users.${attrName}.name;
+            in if maybeName == null then attrName else maybeName;
+
+            isHomeManageable = attrName: let
+              home = users.${attrName}.home;
+              pref = lib.flip lib.strings.hasPrefix home;
+            in
+            home != null &&
+            (
+              (extractName attrName) == "root" ||
+              pref "/home"
+              );
+
+              manageableUsers = builtins.filter isHomeManageable (builtins.attrNames users);
+
+              userDb = pkgs.writeText "users.json" (builtins.toJSON (
+                builtins.foldl'
+                (acc: x:
+                  let
+                    username = extractName x;
+                    homeDirectory = users.${x}.home;
+                    activator = mkActivator { inherit username homeDirectory; };
+                  in acc // {
+                    ${username} = "${activator}/activate";
+                  })
+                {}
+                manageableUsers
+                ));
+
+          in pkgs.writeShellScriptBin "hm-system" ''
+                set -uo pipefail
+
+                me=$(id -u -n)
+
+                activator=$(<"${userDb}" "${pkgs.jq}/bin/jq" -re ".\"$me\"")
+
+                if [ $? -ne 0 ]; then
+                  echo "this user is not capable of using $(basename ''${BASH_SOURCE[0]}) (no home directory in nixos)" >&2
+
+                  exit 1
+                fi
+
+                exec "$activator"
+          '')
+        ];
+      });
+
+
       defaultApp.x86_64-linux = (
         let
           username      = builtins.getEnv "USER";
           homeDirectory = /. + "/${builtins.getEnv "HOME"}";
 
-          activator     = self.lib.mkActivator { inherit  username homeDirectory; };
+          activator     = mkActivator { inherit  username homeDirectory; };
 
         in {
           type = "app";
