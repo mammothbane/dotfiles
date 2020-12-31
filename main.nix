@@ -12,6 +12,7 @@
     ./vim.nix
     ./shells.nix
     ./graphical.nix
+    ./packages.nix
     ./fs.nix
   ];
 
