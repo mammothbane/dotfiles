@@ -1,9 +1,19 @@
-{ config, lib, ... }:
+{ config, pkgs, lib, ... }:
 
 let
-  m: keyspec = "${config.xsession.windowManager.i3.config.modifier}+${keyspec}";
+  m = keyspec: "${config.xsession.windowManager.i3.config.modifier}+${keyspec}";
 
-{
+in {
+  home.packages = with pkgs; [
+    i3lock
+    i3status-rust
+    i3lock-fancy
+
+    rofi
+    dmenu
+    lighthouse
+  ];
+
   xsession = {
     enable = true;
     scriptPath = ".hm-xsession";
@@ -13,18 +23,11 @@ let
     windowManager.i3 = {
       enable = true;
 
-      extraPackages = with pkgs; [
-        i3lock
-        i3status-rust
-        i3lock-fancy
-
-        rofi
-        dmenu
-        lighthouse
-      ];
 
       config = {
         modifier = "Mod4";
+
+        terminal = "${pkgs.alacritty}/bin/alacritty";
 
         keybindings = lib.mkOptionDefault {
           ${m "h"} = lib.mkForce "focus left";

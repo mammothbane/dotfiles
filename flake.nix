@@ -91,7 +91,9 @@
         neuron = import inputs.neuron {};
       });
 
-      home-pkgs-overlay = (self: super: pkgs.callPackage ./pkgs {});
+      home-pkgs-overlay = (self: super: import ./pkgs {
+        inherit (self) callPackage;
+      });
 
       overlays = [
         cachix-overlay
@@ -119,6 +121,11 @@
 
         inherit pkgs username homeDirectory;
       }).activationPackage;
+
+      username      = builtins.getEnv "USER";
+      homeDirectory = /. + "/${builtins.getEnv "HOME"}";
+
+      activator     = mkActivator { inherit  username homeDirectory; };
 
     in {
       inherit overlays;
@@ -178,18 +185,11 @@
         ];
       });
 
+      defaultPackage.x86_64-linux = activator;
 
-      defaultApp.x86_64-linux = (
-        let
-          username      = builtins.getEnv "USER";
-          homeDirectory = /. + "/${builtins.getEnv "HOME"}";
-
-          activator     = mkActivator { inherit  username homeDirectory; };
-
-        in {
-          type = "app";
-          program = "${activator}/activate";
-        }
-      );
+      defaultApp.x86_64-linux = {
+        type = "app";
+        program = "${activator}/activate";
+      };
     };
 }

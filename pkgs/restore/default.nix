@@ -1,15 +1,23 @@
-{ pkgs, ... }:
+{
+  writeShellScriptBin,
+  postgresql96,
+  mongodb-tools,
+  ...
+}:
+
+with builtins;
 
 let
-  fileContents = builtins.readFile ./restore;
-  substituted = builtins.replaceStrings
+  fileContents = readFile ./restore;
+  substituted = replaceStrings
     ["mongorestore" "pg_restore" "psql"]
     [
-      "${pkgs.mongodb-tools}/bin/mongorestore" 
-      "${pkgs.postgresql96}/bin/pg_restore"
-      "${pkgs.postgresql96}/bin/psql"
+      "${mongodb-tools}/bin/mongorestore"
+      "${postgresql96}/bin/pg_restore"
+      "${postgresql96}/bin/psql"
     ]
     fileContents;
 
-in pkgs.writeShellScriptBin "restore" substituted
+in writeShellScriptBin "restore" substituted
+
 

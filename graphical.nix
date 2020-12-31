@@ -4,7 +4,9 @@
     ./xsession.nix
   ];
 
-  home.packages = [
+  pinentry = pkgs.pinentry_qt5;
+
+  home.packages = with pkgs; [
     discord
     slack
 

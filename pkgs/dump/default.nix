@@ -1,11 +1,18 @@
-{ pkgs, ... }:
+{
+  writeShellScriptBin,
+  postgresql96,
+  mongodb-tools,
+  ...
+}:
+
+with builtins;
 
 let
-  fileContents = builtins.readFile ./dump;
-  substituted = builtins.replaceStrings
+  fileContents = readFile ./dump;
+  substituted = replaceStrings
     ["mongodump" "pg_dump"]
-    ["${pkgs.mongodb-tools}/bin/mongodump" "${pkgs.postgresql96}/bin/pg_dump"]
+    ["${mongodb-tools}/bin/mongodump" "${postgresql96}/bin/pg_dump"]
     fileContents;
 
-in pkgs.writeShellScriptBin "dump" substituted
+in writeShellScriptBin "dump" substituted
 
