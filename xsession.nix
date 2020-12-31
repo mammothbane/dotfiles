@@ -9,14 +9,11 @@ in {
     i3status-rust
     i3lock-fancy
 
-    rofi
-    dmenu
     lighthouse
   ];
 
   xsession = {
     enable = true;
-    scriptPath = ".hm-xsession";
 
     numlock.enable = true;
 
@@ -43,9 +40,9 @@ in {
         };
 
         gaps = {
-          smartGaps = true;
+          smartGaps = false;
           outer = 0;
-          inner = 25;
+          inner = 23;
         };
       };
     };

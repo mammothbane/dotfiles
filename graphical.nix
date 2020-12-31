@@ -29,11 +29,13 @@
 
   programs = {
     obs-studio.enable = true;
+    rofi = {};
   };
 
   services = {
     # TODO
     polybar = {};
+    dunst = {};
     random-background = {};
   };
 }
