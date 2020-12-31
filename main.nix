@@ -14,6 +14,7 @@
     ./packages.nix
     ./fs.nix
     ./env.nix
+    ./email.nix
   ];
 
   options = with lib; {
@@ -69,7 +70,6 @@
 
       # TODO
       irssi = {};
-      notmuch = {};
       starship = {};
     };
 
@@ -93,10 +93,6 @@
       lorri.enable = true;
 
       spotifyd.enable = true;
-
-      # TODO(unstable)
-      # lieer = {};
-      muchsync = {};
     };
 
     systemd.user.startServices = true;
