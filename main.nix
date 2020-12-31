@@ -69,6 +69,7 @@
 
         extraConfig = ''
           pinentry-program ${config.pinentry}/bin/pinentry
+          keyserver hkps://keys.openpgp.org
         '';
       };
 
