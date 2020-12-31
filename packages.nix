@@ -1,5 +1,9 @@
 { pkgs, ... }:
 {
+  imports = [
+    ./wrap-setuid.nix
+  ];
+
   home.packages = with pkgs; [
     jq
     ripgrep

@@ -1,5 +1,7 @@
+{ pkgs, ... }:
+
 let
-  setuidWrapper = pkgs.writeShellScriptBin "wrap_setuid" ''
+  setuidWrapper = pkgs.writeShellScript "wrap_setuid" ''
     # this is heuristic, but it will definitely do the trick on nixos, and should work
     # for most reasonable distros
     binaryName=$1
@@ -22,9 +24,11 @@ let
 
     exec "$binary" "$@"
   '';
-  wrapSetuid = binaryName: pkgs.writeShellScriptBin binaryName ''exec "${setuidWrapper}/bin/wrap_setuid" "${binaryName}" "$@"'';
+
+  wrapSetuid = binaryName: pkgs.writeShellScriptBin binaryName ''exec "${setuidWrapper}" "${binaryName}" "$@"'';
+
 in {
-  home.packages = pkgs.wrapSetuids [
+  home.packages = map wrapSetuid [
     "sudo"
     "sudoedit"
     "su"
@@ -39,6 +43,5 @@ in {
     "fusermount"
     "fusermount3"
     "dbus-daemon-launch-helper"
-    "ping"
   ];
 }
