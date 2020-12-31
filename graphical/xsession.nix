@@ -10,6 +10,17 @@ in {
     lighthouse
   ];
 
+  services.picom = {
+    enable = true;
+
+    fade = true;
+    fadeDelta = 6;
+
+    activeOpacity = "1.0";
+
+    inactiveOpacity = "0.9";
+  };
+
   xsession = {
     enable = true;
 
