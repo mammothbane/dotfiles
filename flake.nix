@@ -79,19 +79,39 @@
 
   outputs = { self, nixpkgs, flake-util, ... } @ inputs:
     let
+      vim-overlay = (import ./vim-plugins.nix {
+        inherit (inputs) darcula ncm2-alchemist ncm2-go ncm2-pyclang ncm2-racer ncm2-tern nvim-typescript ncm2-vim vim-mix-format;
+      });
+
+      cachix-overlay = (self: super: {
+        cachix = import inputs.cachix;
+      });
+
+      neuron-overlay = (self: super: {
+        neuron = import inputs.neuron {};
+      });
+
+      home-pkgs-overlay = (self: super: pkgs.callPackage ./pkgs {});
+
+      overlays = [
+        cachix-overlay
+        neuron-overlay
+        vim-overlay
+        home-pkgs-overlay
+      ];
+
       pkgs = import nixpkgs {
         system = "x86_64-linux";
         config = import ./nixpkgs-config.nix;
+
+        inherit overlays;
       };
 
       composeOverlays = builtins.foldl' pkgs.lib.composeExtensions (self: super: {});
 
       mkActivator = { username, homeDirectory }: (inputs.home-manager.lib.homeManagerConfiguration {
         configuration = {
-          nixpkgs.overlays = [
-            self.overlay
-          ];
-
+          nixpkgs.overlays = self.overlays;
           imports = [ ./main.nix ];
         };
 
@@ -101,16 +121,7 @@
       }).activationPackage;
 
     in {
-      overlay = composeOverlays [
-        (import ./vim-plugins.nix {
-          inherit (inputs) darcula ncm2-alchemist ncm2-go ncm2-pyclang ncm2-racer ncm2-tern nvim-typescript ncm2-vim vim-mix-format;
-        })
-
-        (self: super: {
-          cachix = import inputs.cachix;
-          neuron = import inputs.neuron {};
-        })
-      ];
+      inherit overlays;
 
       lib = { inherit mkActivator; };
 
