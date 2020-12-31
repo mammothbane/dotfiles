@@ -58,7 +58,11 @@
       push.default = "current";
       pull.rebase = true;
       credential.helper = "cache";
-      advice.detachedHead = false;
+
+      advice = {
+        detachedHead = false;
+        addEmptyPathspec = false;
+      };
     };
   };
 }
