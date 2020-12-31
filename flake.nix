@@ -111,10 +111,14 @@
 
       composeOverlays = builtins.foldl' pkgs.lib.composeExtensions (self: super: {});
 
-      mkActivator = { username, homeDirectory }: (inputs.home-manager.lib.homeManagerConfiguration {
+      mkActivator = { username, homeDirectory, graphical ? false }: (inputs.home-manager.lib.homeManagerConfiguration {
         configuration = {
           nixpkgs.overlays = self.overlays;
-          imports = [ ./main.nix ];
+
+          imports = [
+            ./main.nix
+          ]
+          ++ pkgs.lib.optional graphical ./graphical.nix;
         };
 
         system = "x86_64-linux";
@@ -125,12 +129,27 @@
       username      = builtins.getEnv "USER";
       homeDirectory = /. + "/${builtins.getEnv "HOME"}";
 
-      activator     = mkActivator { inherit  username homeDirectory; };
+      app = activator: {
+        type = "app";
+        program = "${activator}/activate";
+      };
+
+      packages = {
+        minimal = mkActivator { inherit username homeDirectory; };
+        graphical = mkActivator {
+          inherit username homeDirectory;
+          graphical = true;
+        };
+      };
+
+      apps = builtins.mapAttrs (name: value: app value) packages;
 
     in {
       inherit overlays;
 
-      lib = { inherit mkActivator; };
+      lib = {
+        inherit mkActivator;
+      };
 
       nixosModule = ({ config, pkgs, lib, ... }: {
         environment.systemPackages = [
@@ -185,11 +204,10 @@
         ];
       });
 
-      defaultPackage.x86_64-linux = activator;
+      packages.x86_64-linux = packages;
+      apps.x86_64-linux = apps;
 
-      defaultApp.x86_64-linux = {
-        type = "app";
-        program = "${activator}/activate";
-      };
+      defaultPackage.x86_64-linux = packages.minimal;
+      defaultApp.x86_64-linux = apps.minimal;
     };
 }
