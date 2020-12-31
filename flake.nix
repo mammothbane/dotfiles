@@ -118,7 +118,7 @@
           imports = [
             ./main.nix
           ]
-          ++ pkgs.lib.optional graphical ./graphical.nix;
+          ++ pkgs.lib.optional graphical ./graphical;
         };
 
         system = "x86_64-linux";

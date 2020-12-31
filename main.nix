@@ -29,6 +29,14 @@
     news.display = "silent";
 
     programs = {
+      bat = {
+        enable = true;
+        config = {
+          pager = "less -FR";
+          theme = "OneHalfDark";
+        };
+      };
+
       broot = {
         enable = true;
 

@@ -33,6 +33,20 @@ in {
 
     lfs.enable = true;
 
+    delta = {
+      enable = true;
+
+      options = {
+        features = "decorations line-numbers side-by-side";
+        syntax-theme = "OneHalfDark";
+        decorations = {
+          file-style = "bold yellow ul";
+          file-decoration-style = "none";
+          commit-decoration-style = "bold yellow box ul";
+        };
+      };
+    };
+
     aliases = {
       co = "checkout";
 

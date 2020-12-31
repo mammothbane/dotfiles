@@ -5,9 +5,7 @@ let
 
 in {
   home.packages = with pkgs; [
-    i3lock
     i3status-rust
-    i3lock-fancy
 
     lighthouse
   ];
@@ -23,7 +21,15 @@ in {
       config = {
         modifier = "Mod4";
 
+        bars = [];
+
         terminal = "${pkgs.alacritty}/bin/alacritty";
+
+        startup = [
+          { command = "systemctl --user restart polybar"; always = true; notification = false; }
+        ];
+
+        menu = "${config.programs.rofi.package}/bin/rofi -combi-modi drun#run#window#ssh -show combi";
 
         keybindings = lib.mkOptionDefault {
           ${m "h"} = lib.mkForce "focus left";
@@ -40,7 +46,9 @@ in {
         };
 
         gaps = {
+          smartBorders = "on";
           smartGaps = false;
+
           outer = 0;
           inner = 23;
         };
