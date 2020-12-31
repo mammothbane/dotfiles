@@ -11,17 +11,17 @@
     slack
     chromium
     spotify
-    vscodium
 
+    steam
     minecraft
-
-    alacritty
 
     shutter
 
     yubikey-personalization
     yubioath-desktop
 
+    alacritty
+    vscodium
     jetbrains.idea-ultimate
     jetbrains.clion
     jetbrains.pycharm-professional
@@ -31,8 +31,8 @@
     obs-studio.enable = true;
   };
 
-  # TODO
   services = {
+    # TODO
     polybar = {};
     random-background = {};
   };

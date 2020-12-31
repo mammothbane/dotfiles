@@ -23,7 +23,6 @@ in {
     windowManager.i3 = {
       enable = true;
 
-
       config = {
         modifier = "Mod4";
 
@@ -45,7 +44,8 @@ in {
 
         gaps = {
           smartGaps = true;
-          outer = 5;
+          outer = 0;
+          inner = 25;
         };
       };
     };

@@ -51,6 +51,14 @@
 
       lesspipe.enable = true;
 
+      gpg = {
+        enable = true;
+
+        settings = {
+          keyserver = "hkps://keys.openpgp.org";
+        };
+      };
+
       # TODO
       irssi = {};
       notmuch = {};
@@ -66,9 +74,10 @@
         defaultCacheTtl = 60;
         maxCacheTtl = 120;
 
+        pinentryFlavor = null;
+
         extraConfig = ''
           pinentry-program ${config.pinentry}/bin/pinentry
-          keyserver hkps://keys.openpgp.org
         '';
       };
 
