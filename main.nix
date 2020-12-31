@@ -14,6 +14,7 @@
     ./graphical.nix
     ./packages.nix
     ./fs.nix
+    ./env.nix
   ];
 
   options = with lib; {
@@ -25,20 +26,7 @@
   };
 
   config = {
-    home = {
-      stateVersion = "20.09";
-
-      sessionVariables = {
-        GCC_COLORS = "error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01";
-        EDITOR = "nvim";
-        VISUAL = "nvim";
-        KEYTIMEOUT = 1;
-        LOCALE_ARCHIVE = "${pkgs.glibcLocales}/lib/locale/locale-archive";
-        PATH = "$HOME/.nix-profile/bin:$HOME/.nix-profile/sbin";
-        PAGER = "${pkgs.less}/bin/less";
-      };
-    };
-
+    home.stateVersion = "20.09";
     news.display = "silent";
 
     programs = {
@@ -94,18 +82,6 @@
       muchsync = {};
     };
 
-    systemd.user = {
-      paths = {
-      };
-
-      services = {
-      };
-
-      sessionVariables = {
-        GSM_SKIP_SSH_AGENT_WORKAROUND = "1";
-      };
-
-      startServices = true;
-    };
+    systemd.user.startServices = true;
   };
 }

@@ -39,9 +39,6 @@ in {
     bash = {
       enable = true;
 
-      sessionVariables = {
-      };
-
       initExtra = aliases;
     };
 

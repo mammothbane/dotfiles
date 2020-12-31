@@ -2,7 +2,7 @@
   description = "my home manager";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/release-20.09";
+    nixpkgs.url = "github:nixos/nixpkgs/master";
     flake-util.url = "github:numtide/flake-utils";
 
     home-manager = {

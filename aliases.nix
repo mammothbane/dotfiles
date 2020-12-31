@@ -5,9 +5,12 @@
 
   alias xclip='xclip -selection c'
   alias rs="exec -l $SHELL"
+  alias discord=Discord
 
   sys() {
+    OLDPATH=$PATH
     PATH="/run/wrappers/bin:/run/current-system/sw/bin:/run/current-system/sw/sbin" $@
+    PATH=$OLDPATH
   }
 
   ops() {
