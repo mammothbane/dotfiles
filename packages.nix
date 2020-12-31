@@ -58,7 +58,7 @@
     _1password
     # neuron
 
-    nixUnstable
+    nixFlakes
     nix-index
     arion
     # cachix
@@ -70,12 +70,9 @@
 
     python3
     rustup
-    elixir_1_10
     ghc
 
     gocode
-
-    pinentry
 
     tulip.dump
     tulip.restore

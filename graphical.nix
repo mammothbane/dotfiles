@@ -9,17 +9,22 @@
   home.packages = with pkgs; [
     discord
     slack
+    chromium
+    spotify
+    vscodium
 
     minecraft
 
     alacritty
 
-    spotify
-
     shutter
 
     yubikey-personalization
     yubioath-desktop
+
+    jetbrains.idea-ultimate
+    jetbrains.clion
+    jetbrains.pycharm-professional
   ];
 
   programs = {
