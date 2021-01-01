@@ -5,79 +5,92 @@
   ];
 
   home.packages = with pkgs; [
-    jq
-    ripgrep
-    fd
-    xclip
-    iotop
-    curl
-    socat
-    wget
-    youtube-dl
-    nmap
-    gnupg
-    yaml2json
+    # utilities
     coreutils
-    unzip
-    bashInteractive
-    less
-    file
     binutils
-    which
+    diffutils
+    findutils
+    patchelf
     gnugrep
     gnutar
-    openssh
-    patchelf
-    findutils
     gawk
-    utillinux
-    bzip2
-    e2fsprogs
-    diffutils
+    bashInteractive
+    less
+    which
+    file
     flock
     acl
+    gnupatch
+    gnused
+
+    # runtime system
+    systemd
+    procps
+    utillinux
+    kmod
+
+    # compression
+    lzma
+    bzip2
+    unzip
     gzip
+
+    # libs
+    openssl
+    glibcLocales
+
+    # fs
+    e2fsprogs
+    iotop
+    dosfstools
+    ntfs3g
+
+    # network
+    nmap
+    socat
+    wget
+    curl
     inetutils
     iproute
     iputils
-    kmod
-    dosfstools
-    ntfs3g
     netcat-gnu
-    gnupatch
-    procps
-    rr
-    gdb
-    gnused
-    strace
-    linuxPackages.perf
-    lzma
-    gzip
-    systemd
-    cmake
+    openssh
+
+    # newer/specialized find and transform
+    fd
+    ripgrep
+    jq
+    yaml2json
     dos2unix
 
-    openssl
+    # debugging, tracing
+    rr
+    gdb
+    strace
+    linuxPackages.perf
 
-    _1password
-    # neuron
-
+    # nix
     nixFlakes
     nix-index
     arion
     # cachix
 
-    cordless
-    ncspot
-
-    glibcLocales
-
+    # programming
     python3
     rustup
     ghc
-
     gocode
 
+    # misc / discretionary
+    gnupg
+    youtube-dl
+    _1password
+    # neuron
+    cordless
+    ncspot
+    cmake
+
+    # tulip
     tulip.dump
     tulip.restore
   ];

@@ -21,6 +21,8 @@
     shutter
     dolphin
 
+    xclip
+
     yubikey-personalization
     yubioath-desktop
 
