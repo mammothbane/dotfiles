@@ -28,6 +28,8 @@
     procps
     utillinux
     kmod
+    pciutils
+    usbutils
 
     # compression
     lzma
