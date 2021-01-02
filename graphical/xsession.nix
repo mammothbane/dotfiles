@@ -19,6 +19,10 @@ in {
     activeOpacity = "1.0";
 
     inactiveOpacity = "0.9";
+
+    opacityRule = [
+      "99:class_g = 'XScreenSaver'"
+    ];
   };
 
   xsession = {
@@ -54,6 +58,8 @@ in {
           ${m "Shift+l"} = lib.mkForce "move right";
 
           ${m "b"} = "split h";
+
+          ${m "Control+l"} = "exec ${config.services.screen-locker.lockCmd}";
         };
 
         gaps = {

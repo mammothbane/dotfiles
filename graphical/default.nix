@@ -65,5 +65,15 @@
       imageDirectory = "%h/.local/wallpapers";
       interval = "5m";
     };
+
+    xscreensaver = {
+      enable = true;
+      settings = {
+        mode = "blank";
+        fadeTicks = 20;
+        lock = false;
+        timeout = 30;
+      };
+    };
   };
 }

@@ -26,8 +26,6 @@
       default-key = "5182 3FB7 8BDE 4316 BE0D  32DC BEC7 D571 1325 BB59";
       keyid-format = "long";
       with-fingerprint = "";
-      log-file = "/home/tulip/gpg.log";
-      debug-level = "guru";
     };
   };
 }
