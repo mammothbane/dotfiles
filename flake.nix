@@ -111,20 +111,33 @@
 
       composeOverlays = builtins.foldl' pkgs.lib.composeExtensions (self: super: {});
 
-      mkActivator = { username, homeDirectory, graphical ? false }: (inputs.home-manager.lib.homeManagerConfiguration {
-        configuration = {
-          nixpkgs.overlays = self.overlays;
+      home-manager-patched = pkgs.applyPatches {
+        name = "home-manager-patched";
+        src = inputs.home-manager;
+        patches = [
+          ./patches/ssh_auth_sock.patch
+        ];
+      };
 
-          imports = [
-            ./main.nix
-          ]
-          ++ pkgs.lib.optional graphical ./graphical;
-        };
+      mkActivator = { username, homeDirectory, graphical ? false }:
+        (import "${home-manager-patched}/modules" {
+          check = true;
 
-        system = "x86_64-linux";
+          inherit pkgs;
 
-        inherit pkgs username homeDirectory;
-      }).activationPackage;
+          configuration = {
+            nixpkgs.overlays = self.overlays;
+
+            imports = [
+              ./main.nix
+            ]
+            ++ pkgs.lib.optional graphical ./graphical;
+
+            home = {
+              inherit username homeDirectory;
+            };
+          };
+        }).activationPackage;
 
       username      = builtins.getEnv "USER";
       homeDirectory = /. + "/${builtins.getEnv "HOME"}";

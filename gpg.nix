@@ -1,9 +1,6 @@
 { config, lib, pkgs, ... }:
 {
-
-  home.sessionVariables = lib.optionalAttrs config.services.gpg-agent.enableSshSupport {
-    SSH_AUTH_SOCK = lib.mkDefault "\${SSH_AUTH_SOCK:-$(${pkgs.gnupg}/bin/gpgconf --list-dirs agent-ssh-socket)}";
-  };
+  home.sessionVariables.SSH_AUTH_SOCK = lib.mkForce "\${SSH_AUTH_SOCK:-$(${pkgs.gnupg}/bin/gpgconf --list-dirs agent-ssh-socket)}";
 
   services.gpg-agent = {
     enable = true;

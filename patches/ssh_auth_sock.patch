@@ -1,0 +1,13 @@
+diff --git a/modules/services/gpg-agent.nix b/modules/services/gpg-agent.nix
+index 16a4723..0333c87 100644
+--- a/modules/services/gpg-agent.nix
++++ b/modules/services/gpg-agent.nix
+@@ -181,7 +181,7 @@ in
+ 
+       home.sessionVariables =
+         optionalAttrs cfg.enableSshSupport {
+-          SSH_AUTH_SOCK = "$(${pkgs.gnupg}/bin/gpgconf --list-dirs agent-ssh-socket)";
++          SSH_AUTH_SOCK = "\${SSH_AUTH_SOCK:-$(${pkgs.gnupg}/bin/gpgconf --list-dirs agent-ssh-socket)}";
+         };
+ 
+       programs.bash.initExtra = gpgInitStr;
