@@ -87,6 +87,24 @@
         "type": "github"
       }
     },
+    "mammothoverlays": {
+      "locked": {
+        "dir": "overlays",
+        "lastModified": 1609576265,
+        "narHash": "sha256-Sis8wd/OMecaooB5qc6Iyjd/IwNhMkXAE44LdU3Tdmk=",
+        "owner": "mammothbane",
+        "repo": "nixpkgs-own",
+        "rev": "04e19374698094765d1bf17bfc2f1d5d6329a6bf",
+        "type": "github"
+      },
+      "original": {
+        "dir": "overlays",
+        "owner": "mammothbane",
+        "ref": "master",
+        "repo": "nixpkgs-own",
+        "type": "github"
+      }
+    },
     "ncm2-alchemist": {
       "flake": false,
       "locked": {
@@ -239,23 +257,6 @@
         "type": "github"
       }
     },
-    "ownpkgs": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1586343137,
-        "narHash": "sha256-woxjyA0S294zjmEAc4/S1E2g33GJh7/Xpvn3eMzXCQU=",
-        "owner": "mammothbane",
-        "repo": "nixpkgs-own",
-        "rev": "7f2f290ea5af6dfbd0245863efce3fae31b506ad",
-        "type": "github"
-      },
-      "original": {
-        "owner": "mammothbane",
-        "ref": "master",
-        "repo": "nixpkgs-own",
-        "type": "github"
-      }
-    },
     "root": {
       "inputs": {
         "cachix": "cachix",
@@ -263,6 +264,7 @@
         "flake-util": "flake-util",
         "hies": "hies",
         "home-manager": "home-manager",
+        "mammothoverlays": "mammothoverlays",
         "ncm2-alchemist": "ncm2-alchemist",
         "ncm2-go": "ncm2-go",
         "ncm2-pyclang": "ncm2-pyclang",
@@ -272,7 +274,6 @@
         "neuron": "neuron",
         "nixpkgs": "nixpkgs",
         "nvim-typescript": "nvim-typescript",
-        "ownpkgs": "ownpkgs",
         "vim-mix-format": "vim-mix-format"
       }
     },

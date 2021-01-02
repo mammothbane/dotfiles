@@ -10,15 +10,14 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    mammothoverlays.url = "github:mammothbane/nixpkgs-own/master?dir=overlays";
+
+
     hies = {
       url = "github:infinisil/all-hies/master";
       flake = false;
     };
 
-    ownpkgs = {
-      url = "github:mammothbane/nixpkgs-own/master";
-      flake = false;
-    };
 
     neuron = {
       url = "github:srid/neuron/master";
@@ -93,16 +92,10 @@
         })
       );
 
-      gnupg-overlay = (self: super: {
-        gnupg = super.gnupg.overrideAttrs (oldattrs: {
-          patches = oldattrs.patches ++ [ ./patches/scdaemon-shared-access.patch ];
-        });
-      });
-
       overlays = [
         vim-overlay
         additional-packages
-        gnupg-overlay
+        inputs.mammothoverlays.overlay
       ];
 
       pkgs = import nixpkgs {
