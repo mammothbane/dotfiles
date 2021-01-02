@@ -22,6 +22,10 @@
           user = "mammothbane";
         };
 
+        "nathanperry.dev" = {
+          user = "mammothbane";
+        };
+
         "vpn.tulip.co" = {
           user = "developer";
         };
