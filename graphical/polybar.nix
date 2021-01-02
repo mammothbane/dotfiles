@@ -66,10 +66,3 @@
     '';
   };
 }
-
-# // lib.mkIf (config.services.polybar.enable && config.xsession.enable) {
-  # systemd.user.services.polybar.Unit = {
-    # Requires = lib.mkForce [ "hm-graphical-session.target" ];
-    # PartOf = lib.mkForce [];
-  # };
-# }

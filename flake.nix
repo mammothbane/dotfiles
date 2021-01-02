@@ -83,23 +83,26 @@
         inherit (inputs) darcula ncm2-alchemist ncm2-go ncm2-pyclang ncm2-racer ncm2-tern nvim-typescript ncm2-vim vim-mix-format;
       });
 
-      cachix-overlay = (self: super: {
-        cachix = import inputs.cachix;
-      });
+      additional-packages = (self: super:
+        {
+          cachix = import inputs.cachix;
+          neuron = import inputs.neuron {};
+        } //
+        (import ./pkgs {
+          inherit (self) callPackage;
+        })
+      );
 
-      neuron-overlay = (self: super: {
-        neuron = import inputs.neuron {};
-      });
-
-      home-pkgs-overlay = (self: super: import ./pkgs {
-        inherit (self) callPackage;
+      gnupg-overlay = (self: super: {
+        gnupg = super.gnupg.overrideAttrs (oldattrs: {
+          patches = oldattrs.patches ++ [ ./patches/scdaemon-shared-access.patch ];
+        });
       });
 
       overlays = [
-        cachix-overlay
-        neuron-overlay
         vim-overlay
-        home-pkgs-overlay
+        additional-packages
+        gnupg-overlay
       ];
 
       pkgs = import nixpkgs {
