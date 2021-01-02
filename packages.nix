@@ -71,26 +71,30 @@
     strace
     linuxPackages.perf
 
+    # programming
+    python3
+    rustup
+    ghc
+    gocode
+    cmake
+
     # nix
     nixFlakes
     nix-index
     arion
     # cachix
 
-    # programming
-    python3
-    rustup
-    ghc
-    gocode
-
     # misc / discretionary
-    gnupg
     youtube-dl
     _1password
     # neuron
     cordless
     ncspot
-    cmake
+
+    # yubikey / gpg
+    gnupg
+    yubikey-manager
+    yubikey-personalization
 
     # tulip
     tulip.dump

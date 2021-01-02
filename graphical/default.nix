@@ -23,7 +23,6 @@
 
     xclip
 
-    yubikey-personalization
     yubioath-desktop
 
     alacritty
