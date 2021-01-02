@@ -68,10 +68,7 @@
     };
 
     services = {
-      keybase.enable = true;
       lorri.enable = true;
-
-      spotifyd.enable = true;
     };
 
     systemd.user.startServices = true;
