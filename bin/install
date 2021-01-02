@@ -2,6 +2,12 @@
 
 set -euo pipefail
 
+app=''
+
+if [[ "${1:-}" == "g*" ]]; then
+  app='graphical'
+fi
+
 export NIXPKGS_ALLOW_UNFREE=1
 
 exec nix-shell \
