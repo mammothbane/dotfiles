@@ -15,6 +15,7 @@
     ./fs.nix
     ./env.nix
     ./email.nix
+    ./ssh.nix
   ];
 
   options = with lib; {

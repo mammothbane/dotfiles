@@ -39,6 +39,7 @@
       proxied;
 
     extraConfig = ''
+      StreamLocalBindUnlink yes
     '';
   };
 }
