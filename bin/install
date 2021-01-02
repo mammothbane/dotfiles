@@ -8,9 +8,15 @@ if [[ "${1:-}" == "g*" ]]; then
   app='graphical'
 fi
 
+command="nix --experimental-features 'nix-command flakes' run \"github:mammothbane/dotfiles#$app\" --impure"
+
 export NIXPKGS_ALLOW_UNFREE=1
+
+if nix flakes &>/dev/null; then
+    exec $command
+fi
 
 exec nix-shell \
     -I nixpkgs=https://github.com/nixos/nixpkgs/archive/release-20.09.tar.gz \
     -p nixFlakes \
-    --run 'nix --experimental-features "nix-command flakes" run github:mammothbane/dotfiles --impure'
+    --run "$command"
