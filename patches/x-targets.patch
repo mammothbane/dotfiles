@@ -1,0 +1,940 @@
+diff --git a/modules/misc/numlock.nix b/modules/misc/numlock.nix
+index c823f6d..3d55d30 100644
+--- a/modules/misc/numlock.nix
++++ b/modules/misc/numlock.nix
+@@ -15,8 +15,8 @@ in {
+     systemd.user.services.numlockx = {
+       Unit = {
+         Description = "NumLockX";
+-        After = [ "graphical-session-pre.target" ];
+-        PartOf = [ "graphical-session.target" ];
++        After = [ config.x.graphicalTargetPre ];
++        PartOf = [ config.x.graphicalTarget ];
+       };
+ 
+       Service = {
+@@ -25,7 +25,7 @@ in {
+         ExecStart = "${pkgs.numlockx}/bin/numlockx";
+       };
+ 
+-      Install = { WantedBy = [ "graphical-session.target" ]; };
++      Install = { WantedBy = [ config.x.graphicalTarget ]; };
+     };
+   };
+ }
+diff --git a/modules/programs/waybar.nix b/modules/programs/waybar.nix
+index 5472a0e..300313e 100644
+--- a/modules/programs/waybar.nix
++++ b/modules/programs/waybar.nix
+@@ -369,7 +369,7 @@ in {
+           Description =
+             "Highly customizable Wayland bar for Sway and Wlroots based compositors.";
+           Documentation = "https://github.com/Alexays/Waybar/wiki";
+-          PartOf = [ "graphical-session.target" ];
++          PartOf = [ config.x.graphicalTarget ];
+         };
+ 
+         Service = {
+@@ -380,7 +380,7 @@ in {
+           RestartSec = "1sec";
+         };
+ 
+-        Install = { WantedBy = [ "graphical-session.target" ]; };
++        Install = { WantedBy = [ config.x.graphicalTarget ]; };
+       };
+     })
+   ]);
+diff --git a/modules/services/blueman-applet.nix b/modules/services/blueman-applet.nix
+index 5a57acc..7757a2b 100644
+--- a/modules/services/blueman-applet.nix
++++ b/modules/services/blueman-applet.nix
+@@ -24,11 +24,11 @@ with lib;
+     systemd.user.services.blueman-applet = {
+       Unit = {
+         Description = "Blueman applet";
+-        After = [ "graphical-session-pre.target" ];
+-        PartOf = [ "graphical-session.target" ];
++        After = [ config.x.graphicalTargetPre ];
++        PartOf = [ config.x.graphicalTarget ];
+       };
+ 
+-      Install = { WantedBy = [ "graphical-session.target" ]; };
++      Install = { WantedBy = [ config.x.graphicalTarget ]; };
+ 
+       Service = { ExecStart = "${pkgs.blueman}/bin/blueman-applet"; };
+     };
+diff --git a/modules/services/caffeine.nix b/modules/services/caffeine.nix
+index bb24a0e..baf69e3 100644
+--- a/modules/services/caffeine.nix
++++ b/modules/services/caffeine.nix
+@@ -17,7 +17,7 @@ in {
+     systemd.user.services.caffeine = {
+       Unit = { Description = "caffeine"; };
+ 
+-      Install = { WantedBy = [ "graphical-session.target" ]; };
++      Install = { WantedBy = [ config.x.graphicalTarget ]; };
+ 
+       Service = {
+         Restart = "on-failure";
+diff --git a/modules/services/cbatticon.nix b/modules/services/cbatticon.nix
+index 0de69c5..4031646 100644
+--- a/modules/services/cbatticon.nix
++++ b/modules/services/cbatticon.nix
+@@ -103,11 +103,11 @@ in {
+     systemd.user.services.cbatticon = {
+       Unit = {
+         Description = "cbatticon system tray battery icon";
+-        After = [ "graphical-session-pre.target" ];
+-        PartOf = [ "graphical-session.target" ];
++        After = [ config.x.graphicalTargetPre ];
++        PartOf = [ config.x.graphicalTarget ];
+       };
+ 
+-      Install = { WantedBy = [ "graphical-session.target" ]; };
++      Install = { WantedBy = [ config.x.graphicalTarget ]; };
+ 
+       Service = {
+         ExecStart = commandLine;
+diff --git a/modules/services/clipmenu.nix b/modules/services/clipmenu.nix
+index 2e1c10e..df84eb6 100644
+--- a/modules/services/clipmenu.nix
++++ b/modules/services/clipmenu.nix
+@@ -26,7 +26,7 @@ in {
+     systemd.user.services.clipmenu = {
+       Unit = {
+         Description = "Clipboard management daemon";
+-        After = [ "graphical-session.target" ];
++        After = [ config.x.graphicalTarget ];
+       };
+ 
+       Service = {
+@@ -37,7 +37,7 @@ in {
+           }";
+       };
+ 
+-      Install = { WantedBy = [ "graphical-session.target" ]; };
++      Install = { WantedBy = [ config.x.graphicalTarget ]; };
+     };
+   };
+ }
+diff --git a/modules/services/dunst.nix b/modules/services/dunst.nix
+index 76fee14..a800f94 100644
+--- a/modules/services/dunst.nix
++++ b/modules/services/dunst.nix
+@@ -133,8 +133,8 @@ in {
+       systemd.user.services.dunst = {
+         Unit = {
+           Description = "Dunst notification daemon";
+-          After = [ "graphical-session-pre.target" ];
+-          PartOf = [ "graphical-session.target" ];
++          After = [ config.x.graphicalTargetPre ];
++          PartOf = [ config.x.graphicalTarget ];
+         };
+ 
+         Service = {
+diff --git a/modules/services/dwm-status.nix b/modules/services/dwm-status.nix
+index a0c2a72..d284d16 100644
+--- a/modules/services/dwm-status.nix
++++ b/modules/services/dwm-status.nix
+@@ -56,10 +56,10 @@ in {
+     systemd.user.services.dwm-status = {
+       Unit = {
+         Description = "DWM status service";
+-        PartOf = [ "graphical-session.target" ];
++        PartOf = [ config.x.graphicalTarget ];
+       };
+ 
+-      Install = { WantedBy = [ "graphical-session.target" ]; };
++      Install = { WantedBy = [ config.x.graphicalTarget ]; };
+ 
+       Service = { ExecStart = "${cfg.package}/bin/dwm-status ${configFile}"; };
+     };
+diff --git a/modules/services/flameshot.nix b/modules/services/flameshot.nix
+index c8659d5..ca14821 100644
+--- a/modules/services/flameshot.nix
++++ b/modules/services/flameshot.nix
+@@ -19,15 +19,15 @@ in {
+       Unit = {
+         Description = "Flameshot screenshot tool";
+         After = [
+-          "graphical-session-pre.target"
++          config.x.graphicalTargetPre
+           "polybar.service"
+           "stalonetray.service"
+           "taffybar.service"
+         ];
+-        PartOf = [ "graphical-session.target" ];
++        PartOf = [ config.x.graphicalTarget ];
+       };
+ 
+-      Install = { WantedBy = [ "graphical-session.target" ]; };
++      Install = { WantedBy = [ config.x.graphicalTarget ]; };
+ 
+       Service = {
+         Environment = "PATH=${config.home.profileDirectory}/bin";
+diff --git a/modules/services/gammastep.nix b/modules/services/gammastep.nix
+index 7740c46..6f8b956 100644
+--- a/modules/services/gammastep.nix
++++ b/modules/services/gammastep.nix
+@@ -134,11 +134,11 @@ in {
+     systemd.user.services.gammastep = {
+       Unit = {
+         Description = "Gammastep colour temperature adjuster";
+-        After = [ "graphical-session-pre.target" ];
+-        PartOf = [ "graphical-session.target" ];
++        After = [ config.x.graphicalTargetPre ];
++        PartOf = [ config.x.graphicalTarget ];
+       };
+ 
+-      Install = { WantedBy = [ "graphical-session.target" ]; };
++      Install = { WantedBy = [ config.x.graphicalTarget ]; };
+ 
+       Service = {
+         ExecStart = let
+diff --git a/modules/services/grobi.nix b/modules/services/grobi.nix
+index 4dfc5d6..f4f5674 100644
+--- a/modules/services/grobi.nix
++++ b/modules/services/grobi.nix
+@@ -74,8 +74,8 @@ in {
+     systemd.user.services.grobi = {
+       Unit = {
+         Description = "grobi display auto config daemon";
+-        After = [ "graphical-session-pre.target" ];
+-        PartOf = [ "graphical-session.target" ];
++        After = [ config.x.graphicalTargetPre ];
++        PartOf = [ config.x.graphicalTarget ];
+       };
+ 
+       Service = {
+@@ -86,7 +86,7 @@ in {
+         Environment = "PATH=${pkgs.xorg.xrandr}/bin:${pkgs.bash}/bin";
+       };
+ 
+-      Install = { WantedBy = [ "graphical-session.target" ]; };
++      Install = { WantedBy = [ config.x.graphicalTarget ]; };
+     };
+ 
+     xdg.configFile."grobi.conf".text = builtins.toJSON {
+diff --git a/modules/services/kdeconnect.nix b/modules/services/kdeconnect.nix
+index 82de1f0..9bdadda 100644
+--- a/modules/services/kdeconnect.nix
++++ b/modules/services/kdeconnect.nix
+@@ -31,11 +31,11 @@ in {
+         Unit = {
+           Description =
+             "Adds communication between your desktop and your smartphone";
+-          After = [ "graphical-session-pre.target" ];
+-          PartOf = [ "graphical-session.target" ];
++          After = [ config.x.graphicalTargetPre ];
++          PartOf = [ config.x.graphicalTarget ];
+         };
+ 
+-        Install = { WantedBy = [ "graphical-session.target" ]; };
++        Install = { WantedBy = [ config.x.graphicalTarget ]; };
+ 
+         Service = {
+           Environment = "PATH=${config.home.profileDirectory}/bin";
+@@ -50,15 +50,15 @@ in {
+         Unit = {
+           Description = "kdeconnect-indicator";
+           After = [
+-            "graphical-session-pre.target"
++            config.x.graphicalTargetPre
+             "polybar.service"
+             "taffybar.service"
+             "stalonetray.service"
+           ];
+-          PartOf = [ "graphical-session.target" ];
++          PartOf = [ config.x.graphicalTarget ];
+         };
+ 
+-        Install = { WantedBy = [ "graphical-session.target" ]; };
++        Install = { WantedBy = [ config.x.graphicalTarget ]; };
+ 
+         Service = {
+           Environment = "PATH=${config.home.profileDirectory}/bin";
+diff --git a/modules/services/keepassx.nix b/modules/services/keepassx.nix
+index dc37066..b9cac24 100644
+--- a/modules/services/keepassx.nix
++++ b/modules/services/keepassx.nix
+@@ -15,11 +15,11 @@ with lib;
+     systemd.user.services.keepassx = {
+       Unit = {
+         Description = "KeePassX password manager";
+-        After = [ "graphical-session-pre.target" ];
+-        PartOf = [ "graphical-session.target" ];
++        After = [ config.x.graphicalTargetPre ];
++        PartOf = [ config.x.graphicalTarget ];
+       };
+ 
+-      Install = { WantedBy = [ "graphical-session.target" ]; };
++      Install = { WantedBy = [ config.x.graphicalTarget ]; };
+ 
+       Service = { ExecStart = "${pkgs.keepassx}/bin/keepassx -min -lock"; };
+     };
+diff --git a/modules/services/keynav.nix b/modules/services/keynav.nix
+index c7f1df3..017eba5 100644
+--- a/modules/services/keynav.nix
++++ b/modules/services/keynav.nix
+@@ -13,8 +13,8 @@ in {
+     systemd.user.services.keynav = {
+       Unit = {
+         Description = "keynav";
+-        After = [ "graphical-session-pre.target" ];
+-        PartOf = [ "graphical-session.target" ];
++        After = [ config.x.graphicalTargetPre ];
++        PartOf = [ config.x.graphicalTarget ];
+       };
+ 
+       Service = {
+@@ -23,7 +23,7 @@ in {
+         Restart = "always";
+       };
+ 
+-      Install = { WantedBy = [ "graphical-session.target" ]; };
++      Install = { WantedBy = [ config.x.graphicalTarget ]; };
+     };
+   };
+ }
+diff --git a/modules/services/network-manager-applet.nix b/modules/services/network-manager-applet.nix
+index bf57ed6..cb538dd 100644
+--- a/modules/services/network-manager-applet.nix
++++ b/modules/services/network-manager-applet.nix
+@@ -19,11 +19,11 @@ in {
+     systemd.user.services.network-manager-applet = {
+       Unit = {
+         Description = "Network Manager applet";
+-        After = [ "graphical-session-pre.target" ];
+-        PartOf = [ "graphical-session.target" ];
++        After = [ config.x.graphicalTargetPre ];
++        PartOf = [ config.x.graphicalTarget ];
+       };
+ 
+-      Install = { WantedBy = [ "graphical-session.target" ]; };
++      Install = { WantedBy = [ config.x.graphicalTarget ]; };
+ 
+       Service = {
+         ExecStart = toString
+diff --git a/modules/services/nextcloud-client.nix b/modules/services/nextcloud-client.nix
+index 555ca11..3101dd5 100644
+--- a/modules/services/nextcloud-client.nix
++++ b/modules/services/nextcloud-client.nix
+@@ -11,8 +11,8 @@ with lib;
+     systemd.user.services.nextcloud-client = {
+       Unit = {
+         Description = "Nextcloud Client";
+-        After = [ "graphical-session-pre.target" ];
+-        PartOf = [ "graphical-session.target" ];
++        After = [ config.x.graphicalTargetPre ];
++        PartOf = [ config.x.graphicalTarget ];
+       };
+ 
+       Service = {
+@@ -20,7 +20,7 @@ with lib;
+         ExecStart = "${pkgs.nextcloud-client}/bin/nextcloud";
+       };
+ 
+-      Install = { WantedBy = [ "graphical-session.target" ]; };
++      Install = { WantedBy = [ config.x.graphicalTarget ]; };
+     };
+   };
+ }
+diff --git a/modules/services/owncloud-client.nix b/modules/services/owncloud-client.nix
+index d55d8ff..125030b 100644
+--- a/modules/services/owncloud-client.nix
++++ b/modules/services/owncloud-client.nix
+@@ -11,8 +11,8 @@ with lib;
+     systemd.user.services.owncloud-client = {
+       Unit = {
+         Description = "Owncloud Client";
+-        After = [ "graphical-session-pre.target" ];
+-        PartOf = [ "graphical-session.target" ];
++        After = [ config.x.graphicalTargetPre ];
++        PartOf = [ config.x.graphicalTarget ];
+       };
+ 
+       Service = {
+@@ -20,7 +20,7 @@ with lib;
+         ExecStart = "${pkgs.owncloud-client}/bin/owncloud";
+       };
+ 
+-      Install = { WantedBy = [ "graphical-session.target" ]; };
++      Install = { WantedBy = [ config.x.graphicalTarget ]; };
+     };
+   };
+ }
+diff --git a/modules/services/parcellite.nix b/modules/services/parcellite.nix
+index cf1a7fe..0baa7ef 100644
+--- a/modules/services/parcellite.nix
++++ b/modules/services/parcellite.nix
+@@ -27,11 +27,11 @@ in {
+     systemd.user.services.parcellite = {
+       Unit = {
+         Description = "Lightweight GTK+ clipboard manager";
+-        After = [ "graphical-session-pre.target" ];
+-        PartOf = [ "graphical-session.target" ];
++        After = [ config.x.graphicalTargetPre ];
++        PartOf = [ config.x.graphicalTarget ];
+       };
+ 
+-      Install = { WantedBy = [ "graphical-session.target" ]; };
++      Install = { WantedBy = [ config.x.graphicalTarget ]; };
+ 
+       Service = {
+         ExecStart = "${cfg.package}/bin/${cfg.package.pname}";
+diff --git a/modules/services/pasystray.nix b/modules/services/pasystray.nix
+index 7c6651d..436ccb8 100644
+--- a/modules/services/pasystray.nix
++++ b/modules/services/pasystray.nix
+@@ -13,11 +13,11 @@ with lib;
+     systemd.user.services.pasystray = {
+       Unit = {
+         Description = "PulseAudio system tray";
+-        After = [ "graphical-session-pre.target" ];
+-        PartOf = [ "graphical-session.target" ];
++        After = [ config.x.graphicalTargetPre ];
++        PartOf = [ config.x.graphicalTarget ];
+       };
+ 
+-      Install = { WantedBy = [ "graphical-session.target" ]; };
++      Install = { WantedBy = [ config.x.graphicalTarget ]; };
+ 
+       Service = {
+         Environment =
+diff --git a/modules/services/pbgopy.nix b/modules/services/pbgopy.nix
+index a95ad95..5656ba4 100644
+--- a/modules/services/pbgopy.nix
++++ b/modules/services/pbgopy.nix
+@@ -27,14 +27,14 @@ in {
+     systemd.user.services.pbgopy = {
+       Unit = {
+         Description = "pbgopy server for sharing the clipboard between devices";
+-        After = [ "graphical-session-pre.target" ];
+-        PartOf = [ "graphical-session.target" ];
++        After = [ config.x.graphicalTargetPre ];
++        PartOf = [ config.x.graphicalTarget ];
+       };
+       Service = {
+         ExecStart = "${package}/bin/pbgopy serve --ttl ${cfg.cache.ttl}";
+         Restart = "on-abort";
+       };
+-      Install = { WantedBy = [ "graphical-session.target" ]; };
++      Install = { WantedBy = [ config.x.graphicalTarget ]; };
+     };
+   };
+ }
+diff --git a/modules/services/picom.nix b/modules/services/picom.nix
+index 4c4da8d..dab0c1f 100644
+--- a/modules/services/picom.nix
++++ b/modules/services/picom.nix
+@@ -288,11 +288,11 @@ in {
+     systemd.user.services.picom = {
+       Unit = {
+         Description = "Picom X11 compositor";
+-        After = [ "graphical-session-pre.target" ];
+-        PartOf = [ "graphical-session.target" ];
++        After = [ config.x.graphicalTargetPre ];
++        PartOf = [ config.x.graphicalTarget ];
+       };
+ 
+-      Install = { WantedBy = [ "graphical-session.target" ]; };
++      Install = { WantedBy = [ config.x.graphicalTarget ]; };
+ 
+       Service = let
+         experimentalBackendsFlag =
+diff --git a/modules/services/polybar.nix b/modules/services/polybar.nix
+index 934a990..de1cc3b 100644
+--- a/modules/services/polybar.nix
++++ b/modules/services/polybar.nix
+@@ -113,8 +113,8 @@ in {
+     systemd.user.services.polybar = {
+       Unit = {
+         Description = "Polybar status bar";
+-        After = [ "graphical-session-pre.target" ];
+-        PartOf = [ "graphical-session.target" ];
++        After = [ config.x.graphicalTargetPre ];
++        PartOf = [ config.x.graphicalTarget ];
+         X-Restart-Triggers =
+           [ "${config.xdg.configFile."polybar/config".source}" ];
+       };
+@@ -128,7 +128,7 @@ in {
+         Restart = "on-failure";
+       };
+ 
+-      Install = { WantedBy = [ "graphical-session.target" ]; };
++      Install = { WantedBy = [ config.x.graphicalTarget ]; };
+     };
+   };
+ 
+diff --git a/modules/services/pulseeffects.nix b/modules/services/pulseeffects.nix
+index 445b1c0..ec26adb 100644
+--- a/modules/services/pulseeffects.nix
++++ b/modules/services/pulseeffects.nix
+@@ -37,11 +37,11 @@ in {
+       Unit = {
+         Description = "Pulseeffects daemon";
+         Requires = [ "dbus.service" ];
+-        After = [ "graphical-session-pre.target" ];
+-        PartOf = [ "graphical-session.target" "pulseaudio.service" ];
++        After = [ config.x.graphicalTargetPre ];
++        PartOf = [ config.x.graphicalTarget "pulseaudio.service" ];
+       };
+ 
+-      Install = { WantedBy = [ "graphical-session.target" ]; };
++      Install = { WantedBy = [ config.x.graphicalTarget ]; };
+ 
+       Service = {
+         ExecStart =
+diff --git a/modules/services/random-background.nix b/modules/services/random-background.nix
+index 9deee8d..f1d9c13 100644
+--- a/modules/services/random-background.nix
++++ b/modules/services/random-background.nix
+@@ -71,8 +71,8 @@ in {
+       systemd.user.services.random-background = {
+         Unit = {
+           Description = "Set random desktop background using feh";
+-          After = [ "graphical-session-pre.target" ];
+-          PartOf = [ "graphical-session.target" ];
++          After = [ config.x.graphicalTargetPre ];
++          PartOf = [ config.x.graphicalTarget ];
+         };
+ 
+         Service = {
+@@ -81,7 +81,7 @@ in {
+           IOSchedulingClass = "idle";
+         };
+ 
+-        Install = { WantedBy = [ "graphical-session.target" ]; };
++        Install = { WantedBy = [ config.x.graphicalTarget ]; };
+       };
+     }
+     (mkIf (cfg.interval != null) {
+diff --git a/modules/services/redshift.nix b/modules/services/redshift.nix
+index 86cbab2..9c49ca7 100644
+--- a/modules/services/redshift.nix
++++ b/modules/services/redshift.nix
+@@ -132,11 +132,11 @@ in {
+     systemd.user.services.redshift = {
+       Unit = {
+         Description = "Redshift colour temperature adjuster";
+-        After = [ "graphical-session-pre.target" ];
+-        PartOf = [ "graphical-session.target" ];
++        After = [ config.x.graphicalTargetPre ];
++        PartOf = [ config.x.graphicalTarget ];
+       };
+ 
+-      Install = { WantedBy = [ "graphical-session.target" ]; };
++      Install = { WantedBy = [ config.x.graphicalTarget ]; };
+ 
+       Service = {
+         ExecStart = let
+diff --git a/modules/services/rsibreak.nix b/modules/services/rsibreak.nix
+index 77eaa71..457e5af 100644
+--- a/modules/services/rsibreak.nix
++++ b/modules/services/rsibreak.nix
+@@ -17,11 +17,11 @@ in {
+     systemd.user.services.rsibreak = {
+       Unit = {
+         Description = "RSI break timer";
+-        After = [ "graphical-session-pre.target" ];
+-        PartOf = [ "graphical-session.target" ];
++        After = [ config.x.graphicalTargetPre ];
++        PartOf = [ config.x.graphicalTarget ];
+       };
+ 
+-      Install = { WantedBy = [ "graphical-session.target" ]; };
++      Install = { WantedBy = [ config.x.graphicalTarget ]; };
+ 
+       Service = {
+         Environment = "PATH=${config.home.profileDirectory}/bin";
+diff --git a/modules/services/screen-locker.nix b/modules/services/screen-locker.nix
+index 554d64f..3516823 100644
+--- a/modules/services/screen-locker.nix
++++ b/modules/services/screen-locker.nix
+@@ -56,11 +56,11 @@ in {
+     systemd.user.services.xautolock-session = {
+       Unit = {
+         Description = "xautolock, session locker service";
+-        After = [ "graphical-session-pre.target" ];
+-        PartOf = [ "graphical-session.target" ];
++        After = [ config.x.graphicalTargetPre ];
++        PartOf = [ config.x.graphicalTarget ];
+       };
+ 
+-      Install = { WantedBy = [ "graphical-session.target" ]; };
++      Install = { WantedBy = [ config.x.graphicalTarget ]; };
+ 
+       Service = {
+         ExecStart = concatStringsSep " " ([
+@@ -75,11 +75,11 @@ in {
+     systemd.user.services.xss-lock = {
+       Unit = {
+         Description = "xss-lock, session locker service";
+-        After = [ "graphical-session-pre.target" ];
+-        PartOf = [ "graphical-session.target" ];
++        After = [ config.x.graphicalTargetPre ];
++        PartOf = [ config.x.graphicalTarget ];
+       };
+ 
+-      Install = { WantedBy = [ "graphical-session.target" ]; };
++      Install = { WantedBy = [ config.x.graphicalTarget ]; };
+ 
+       Service = {
+         ExecStart = concatStringsSep " "
+diff --git a/modules/services/stalonetray.nix b/modules/services/stalonetray.nix
+index cca6049..e7c5135 100644
+--- a/modules/services/stalonetray.nix
++++ b/modules/services/stalonetray.nix
+@@ -56,11 +56,11 @@ in {
+       systemd.user.services.stalonetray = {
+         Unit = {
+           Description = "Stalonetray system tray";
+-          After = [ "graphical-session-pre.target" ];
+-          PartOf = [ "graphical-session.target" ];
++          After = [ config.x.graphicalTargetPre ];
++          PartOf = [ config.x.graphicalTarget ];
+         };
+ 
+-        Install = { WantedBy = [ "graphical-session.target" ]; };
++        Install = { WantedBy = [ config.x.graphicalTarget ]; };
+ 
+         Service = {
+           ExecStart = "${cfg.package}/bin/stalonetray";
+diff --git a/modules/services/status-notifier-watcher.nix b/modules/services/status-notifier-watcher.nix
+index ed0537e..aadf218 100644
+--- a/modules/services/status-notifier-watcher.nix
++++ b/modules/services/status-notifier-watcher.nix
+@@ -29,8 +29,8 @@ in {
+     systemd.user.services.status-notifier-watcher = {
+       Unit = {
+         Description = "SNI watcher";
+-        After = [ "graphical-session-pre.target" ];
+-        PartOf = [ "graphical-session.target" ];
++        After = [ config.x.graphicalTargetPre ];
++        PartOf = [ config.x.graphicalTarget ];
+         Before = [ "taffybar.service" ];
+       };
+ 
+@@ -44,7 +44,7 @@ in {
+       };
+ 
+       Install = {
+-        WantedBy = [ "graphical-session.target" "taffybar.service" ];
++        WantedBy = [ config.x.graphicalTarget "taffybar.service" ];
+       };
+     };
+   };
+diff --git a/modules/services/sxhkd.nix b/modules/services/sxhkd.nix
+index d9f0a96..78b61d0 100644
+--- a/modules/services/sxhkd.nix
++++ b/modules/services/sxhkd.nix
+@@ -65,8 +65,8 @@ in
+     systemd.user.services.sxhkd = {
+       Unit = {
+         Description = "simple X hotkey daemon";
+-        After = [ "graphical-session-pre.target" ];
+-        PartOf = [ "graphical-session.target" ];
++        After = [ config.x.graphicalTargetPre ];
++        PartOf = [ config.x.graphicalTarget ];
+       };
+ 
+       Service = {
+@@ -79,7 +79,7 @@ in
+       };
+ 
+       Install = {
+-        WantedBy = [ "graphical-session.target" ];
++        WantedBy = [ config.x.graphicalTarget ];
+       };
+     };
+   };
+diff --git a/modules/services/syncthing.nix b/modules/services/syncthing.nix
+index 4622ac2..0e96b82 100644
+--- a/modules/services/syncthing.nix
++++ b/modules/services/syncthing.nix
+@@ -49,12 +49,12 @@ with lib;
+           Unit = {
+             Description = "QSyncthingTray";
+             After = [
+-              "graphical-session-pre.target"
++              config.x.graphicalTargetPre
+               "polybar.service"
+               "taffybar.service"
+               "stalonetray.service"
+             ];
+-            PartOf = [ "graphical-session.target" ];
++            PartOf = [ config.x.graphicalTarget ];
+           };
+ 
+           Service = {
+@@ -62,7 +62,7 @@ with lib;
+             ExecStart = "${pkgs.qsyncthingtray}/bin/QSyncthingTray";
+           };
+ 
+-          Install = { WantedBy = [ "graphical-session.target" ]; };
++          Install = { WantedBy = [ config.x.graphicalTarget ]; };
+         };
+       };
+     })
+diff --git a/modules/services/taffybar.nix b/modules/services/taffybar.nix
+index 5392755..d62b447 100644
+--- a/modules/services/taffybar.nix
++++ b/modules/services/taffybar.nix
+@@ -27,8 +27,8 @@ in {
+     systemd.user.services.taffybar = {
+       Unit = {
+         Description = "Taffybar desktop bar";
+-        After = [ "graphical-session-pre.target" ];
+-        PartOf = [ "graphical-session.target" ];
++        After = [ config.x.graphicalTargetPre ];
++        PartOf = [ config.x.graphicalTarget ];
+       };
+ 
+       Service = {
+@@ -36,7 +36,7 @@ in {
+         Restart = "on-failure";
+       };
+ 
+-      Install = { WantedBy = [ "graphical-session.target" ]; };
++      Install = { WantedBy = [ config.x.graphicalTarget ]; };
+     };
+ 
+     xsession.importedVariables = [ "GDK_PIXBUF_MODULE_FILE" ];
+diff --git a/modules/services/udiskie.nix b/modules/services/udiskie.nix
+index ca31021..1a17174 100644
+--- a/modules/services/udiskie.nix
++++ b/modules/services/udiskie.nix
+@@ -77,13 +77,13 @@ in {
+     systemd.user.services.udiskie = {
+       Unit = {
+         Description = "udiskie mount daemon";
+-        After = [ "graphical-session-pre.target" ];
+-        PartOf = [ "graphical-session.target" ];
++        After = [ config.x.graphicalTargetPre ];
++        PartOf = [ config.x.graphicalTarget ];
+       };
+ 
+       Service = { ExecStart = "${pkgs.udiskie}/bin/udiskie ${commandArgs}"; };
+ 
+-      Install = { WantedBy = [ "graphical-session.target" ]; };
++      Install = { WantedBy = [ config.x.graphicalTarget ]; };
+     };
+   };
+ }
+diff --git a/modules/services/unclutter.nix b/modules/services/unclutter.nix
+index 5e76063..692a03d 100644
+--- a/modules/services/unclutter.nix
++++ b/modules/services/unclutter.nix
+@@ -40,8 +40,8 @@ in {
+     systemd.user.services.unclutter = {
+       Unit = {
+         Description = "unclutter";
+-        After = [ "graphical-session-pre.target" ];
+-        PartOf = [ "graphical-session.target" ];
++        After = [ config.x.graphicalTargetPre ];
++        PartOf = [ config.x.graphicalTarget ];
+       };
+ 
+       Service = {
+@@ -55,7 +55,7 @@ in {
+         Restart = "always";
+       };
+ 
+-      Install = { WantedBy = [ "graphical-session.target" ]; };
++      Install = { WantedBy = [ config.x.graphicalTarget ]; };
+     };
+   };
+ }
+diff --git a/modules/services/window-managers/i3-sway/sway.nix b/modules/services/window-managers/i3-sway/sway.nix
+index 14d82d2..63a28a1 100644
+--- a/modules/services/window-managers/i3-sway/sway.nix
++++ b/modules/services/window-managers/i3-sway/sway.nix
+@@ -407,9 +407,9 @@ in {
+       Unit = {
+         Description = "sway compositor session";
+         Documentation = [ "man:systemd.special(7)" ];
+-        BindsTo = [ "graphical-session.target" ];
+-        Wants = [ "graphical-session-pre.target" ];
+-        After = [ "graphical-session-pre.target" ];
++        BindsTo = [ config.x.graphicalTarget ];
++        Wants = [ config.x.graphicalTargetPre ];
++        After = [ config.x.graphicalTargetPre ];
+       };
+     };
+   };
+diff --git a/modules/services/wlsunset.nix b/modules/services/wlsunset.nix
+index 084dbdb..946a15e 100644
+--- a/modules/services/wlsunset.nix
++++ b/modules/services/wlsunset.nix
+@@ -65,7 +65,7 @@ in {
+ 
+     systemdTarget = mkOption {
+       type = types.str;
+-      default = "graphical-session.target";
++      default = config.x.graphicalTarget;
+       description = ''
+         Systemd target to bind to.
+       '';
+@@ -76,7 +76,7 @@ in {
+     systemd.user.services.wlsunset = {
+       Unit = {
+         Description = "Day/night gamma adjustments for Wayland compositors.";
+-        PartOf = [ "graphical-session.target" ];
++        PartOf = [ config.x.graphicalTarget ];
+       };
+ 
+       Service = {
+diff --git a/modules/services/xcape.nix b/modules/services/xcape.nix
+index f4f77ca..8af57ed 100644
+--- a/modules/services/xcape.nix
++++ b/modules/services/xcape.nix
+@@ -56,8 +56,8 @@ in {
+     systemd.user.services.xcape = {
+       Unit = {
+         Description = "xcape";
+-        After = [ "graphical-session-pre.target" ];
+-        PartOf = [ "graphical-session.target" ];
++        After = [ config.x.graphicalTargetPre ];
++        PartOf = [ config.x.graphicalTarget ];
+       };
+ 
+       Service = {
+@@ -70,7 +70,7 @@ in {
+            }'";
+       };
+ 
+-      Install = { WantedBy = [ "graphical-session.target" ]; };
++      Install = { WantedBy = [ config.x.graphicalTarget ]; };
+     };
+   };
+ }
+diff --git a/modules/services/xembed-sni-proxy.nix b/modules/services/xembed-sni-proxy.nix
+index ff63d10..c34af3b 100644
+--- a/modules/services/xembed-sni-proxy.nix
++++ b/modules/services/xembed-sni-proxy.nix
+@@ -29,11 +29,11 @@ in {
+     systemd.user.services.xembed-sni-proxy = {
+       Unit = {
+         Description = "XEmbed SNI Proxy";
+-        After = [ "graphical-session-pre.target" ];
+-        PartOf = [ "graphical-session.target" ];
++        After = [ config.x.graphicalTargetPre ];
++        PartOf = [ config.x.graphicalTarget ];
+       };
+ 
+-      Install = { WantedBy = [ "graphical-session.target" ]; };
++      Install = { WantedBy = [ config.x.graphicalTarget ]; };
+ 
+       Service = {
+         Environment = "PATH=${config.home.profileDirectory}/bin";
+diff --git a/modules/services/xscreensaver.nix b/modules/services/xscreensaver.nix
+index ac6194e..6b6f91a 100644
+--- a/modules/services/xscreensaver.nix
++++ b/modules/services/xscreensaver.nix
+@@ -38,8 +38,8 @@ in {
+     systemd.user.services.xscreensaver = {
+       Unit = {
+         Description = "XScreenSaver";
+-        After = [ "graphical-session-pre.target" ];
+-        PartOf = [ "graphical-session.target" ];
++        After = [ config.x.graphicalTargetPre ];
++        PartOf = [ config.x.graphicalTarget ];
+ 
+         # Make sure the service is restarted if the settings change.
+         X-Restart-Triggers =
+@@ -50,7 +50,7 @@ in {
+         ExecStart = "${pkgs.xscreensaver}/bin/xscreensaver -no-splash";
+       };
+ 
+-      Install = { WantedBy = [ "graphical-session.target" ]; };
++      Install = { WantedBy = [ config.x.graphicalTarget ]; };
+     };
+   };
+ }
+diff --git a/modules/services/xsuspender.nix b/modules/services/xsuspender.nix
+index 7d855f0..f522562 100644
+--- a/modules/services/xsuspender.nix
++++ b/modules/services/xsuspender.nix
+@@ -178,8 +178,8 @@ in {
+     systemd.user.services.xsuspender = {
+       Unit = {
+         Description = "XSuspender";
+-        After = [ "graphical-session-pre.target" ];
+-        PartOf = [ "graphical-session.target" ];
++        After = [ config.x.graphicalTargetPre ];
++        PartOf = [ config.x.graphicalTarget ];
+         X-Restart-Triggers =
+           [ "${config.xdg.configFile."xsuspender.conf".source}" ];
+       };
+@@ -189,7 +189,7 @@ in {
+         Environment = mkIf cfg.debug [ "G_MESSAGE_DEBUG=all" ];
+       };
+ 
+-      Install = { WantedBy = [ "graphical-session.target" ]; };
++      Install = { WantedBy = [ config.x.graphicalTarget ]; };
+     };
+   };
+ }
+diff --git a/modules/xsession.nix b/modules/xsession.nix
+index d32c284..f909023 100644
+--- a/modules/xsession.nix
++++ b/modules/xsession.nix
+@@ -10,6 +10,32 @@ in {
+   meta.maintainers = [ maintainers.rycee ];
+ 
+   options = {
++    x = {
++      graphicalTargetPre = mkOption {
++        type = types.str;
++        readOnly = true;
++
++        description = ''
++          The pre-graphical-session target. This defaults to graphical-session-pre.target but is
++          overridden by hm-graphical-session-pre.target if xsession.enable is true.
++        '';
++
++        default = if cfg.enable then "hm-graphical-session-pre.target" else "graphical-session-pre.target";
++      };
++
++      graphicalTarget = mkOption {
++        type = types.str;
++        readOnly = true;
++
++        description = ''
++          The graphical-session target. This defaults to graphical-session.target but is
++          overridden by hm-graphical-session.target if xsession.enable is true.
++        '';
++
++        default = if cfg.enable then "hm-graphical-session.target" else "graphical-session.target";
++      };
++    };
++
+     xsession = {
+       enable = mkEnableOption "X Session";
+ 
+@@ -111,11 +137,20 @@ in {
+       };
+ 
+       # A basic graphical session target for Home Manager.
+-      targets.hm-graphical-session = {
+-        Unit = {
+-          Description = "Home Manager X session";
+-          Requires = [ "graphical-session-pre.target" ];
+-          BindsTo = [ "graphical-session.target" ];
++      targets = {
++        hm-graphical-session-pre = {
++          Unit = {
++            Description = "Home Manager X session (pre)";
++            BindsTo = [ "graphical-session-pre.target" ];
++          };
++        };
++
++        hm-graphical-session = {
++          Unit = {
++            Description = "Home Manager X session";
++            Requires = [ "hm-graphical-session-pre.target" ];
++            BindsTo = [ "graphical-session.target" ];
++          };
+         };
+       };
+     };

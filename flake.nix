@@ -116,6 +116,7 @@
         src = inputs.home-manager;
         patches = [
           ./patches/ssh_auth_sock.patch
+          ./patches/x-targets.patch
         ];
       };
 
