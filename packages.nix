@@ -30,6 +30,7 @@
     kmod
     pciutils
     usbutils
+    lshw
 
     # compression
     lzma
