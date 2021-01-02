@@ -4,12 +4,6 @@ let
   m = keyspec: "${config.xsession.windowManager.i3.config.modifier}+${keyspec}";
 
 in {
-  home.packages = with pkgs; [
-    i3status-rust
-
-    lighthouse
-  ];
-
   services.picom = {
     enable = true;
 
