@@ -83,6 +83,9 @@
     nixFlakes
     nix-index
     arion
+    nix-du
+    nix-tree
+    nix-bisect.defaultPackage.${pkgs.system}
     # cachix
 
     # misc / discretionary
@@ -91,6 +94,7 @@
     # neuron
     cordless
     ncspot
+    graphviz
 
     # yubikey / gpg
     gnupg

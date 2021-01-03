@@ -11,6 +11,7 @@
     };
 
     mammothoverlays.url = "github:mammothbane/nixpkgs-own/master?dir=overlays";
+    nix-bisect.url = "github:mammothbane/nixpkgs-own/master?dir=pkgs/nix-bisect";
 
 
     hies = {
@@ -86,6 +87,7 @@
         {
           cachix = import inputs.cachix;
           neuron = import inputs.neuron {};
+          nix-bisect = inputs.nix-bisect;
         } //
         (import ./pkgs {
           inherit (self) callPackage;

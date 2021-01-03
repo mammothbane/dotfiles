@@ -49,6 +49,21 @@
         "type": "github"
       }
     },
+    "flake-utils": {
+      "locked": {
+        "lastModified": 1609246779,
+        "narHash": "sha256-eq6ZXE/VWo3EMC65jmIT6H/rrUc9UWOWVujkzav025k=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "08c7ad4a0844adc4a7f9f5bb3beae482e789afa4",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
+      }
+    },
     "hies": {
       "flake": false,
       "locked": {
@@ -224,7 +239,62 @@
         "type": "github"
       }
     },
+    "nix-bisect": {
+      "inputs": {
+        "flake-utils": "flake-utils",
+        "nix-bisect": "nix-bisect_2",
+        "nixpkgs": "nixpkgs"
+      },
+      "locked": {
+        "dir": "pkgs/nix-bisect",
+        "lastModified": 1609687808,
+        "narHash": "sha256-+gDFV6LqqKyhQ3TafnIbh8ktXY9XBnwgJyTdWDJA29Y=",
+        "owner": "mammothbane",
+        "repo": "nixpkgs-own",
+        "rev": "664b66ec395a3c23accae95630b18dd79c107bee",
+        "type": "github"
+      },
+      "original": {
+        "dir": "pkgs/nix-bisect",
+        "owner": "mammothbane",
+        "ref": "master",
+        "repo": "nixpkgs-own",
+        "type": "github"
+      }
+    },
+    "nix-bisect_2": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1600780602,
+        "narHash": "sha256-HySEdarxVsdQuQ7aQHh6XCqvogKhA2e3Ar7NAkdkxwI=",
+        "owner": "timokau",
+        "repo": "nix-bisect",
+        "rev": "35963d9c5c947a12f7bfe18532144ada254d534c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "timokau",
+        "repo": "nix-bisect",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
+      "locked": {
+        "lastModified": 1609685962,
+        "narHash": "sha256-vzNUmP13v/oDCrml81MUYu6WW4ckRhI+aAFL52bsMeI=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "d35b77a922e07090832647bbc5530263309c2144",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "master",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_2": {
       "locked": {
         "lastModified": 1609392085,
         "narHash": "sha256-CmkYZKIXssZdIONKkb8QwM4y3Na+fiBwNNaODZg4AwA=",
@@ -272,7 +342,8 @@
         "ncm2-tern": "ncm2-tern",
         "ncm2-vim": "ncm2-vim",
         "neuron": "neuron",
-        "nixpkgs": "nixpkgs",
+        "nix-bisect": "nix-bisect",
+        "nixpkgs": "nixpkgs_2",
         "nvim-typescript": "nvim-typescript",
         "vim-mix-format": "vim-mix-format"
       }
