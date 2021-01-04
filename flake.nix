@@ -88,6 +88,10 @@
           cachix = import inputs.cachix;
           neuron = import inputs.neuron {};
           nix-bisect = inputs.nix-bisect;
+
+          direnv = super.direnv.overrideAttrs (old: {
+            version = "2.27.0";
+          });
         } //
         (import ./pkgs {
           inherit (self) callPackage;
