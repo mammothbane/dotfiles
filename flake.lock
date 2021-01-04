@@ -239,6 +239,22 @@
         "type": "github"
       }
     },
+    "newpkgs": {
+      "locked": {
+        "lastModified": 1609759014,
+        "narHash": "sha256-jAr/ErphdNApcqftn09xdZObY7PESE54/NET8nJnxUw=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "f14e00729644391ac21a6f6544dd6c210702313d",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "master",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "nix-bisect": {
       "inputs": {
         "flake-utils": "flake-utils",
@@ -342,6 +358,7 @@
         "ncm2-tern": "ncm2-tern",
         "ncm2-vim": "ncm2-vim",
         "neuron": "neuron",
+        "newpkgs": "newpkgs",
         "nix-bisect": "nix-bisect",
         "nixpkgs": "nixpkgs_2",
         "nvim-typescript": "nvim-typescript",
