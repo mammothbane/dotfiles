@@ -20,6 +20,7 @@
 
     shutter
     dolphin
+    remmina
 
     xclip
 
