@@ -6,6 +6,7 @@
     flake-util.url = "github:numtide/flake-utils";
 
     newpkgs.url = "github:nixos/nixpkgs/master";
+    stablepkgs.url = "github:nixos/nixpkgs/release-20.09";
 
     home-manager = {
       url = "github:nix-community/home-manager/master";
@@ -86,6 +87,11 @@
         config = import ./nixpkgs-config.nix;
       };
 
+      stablepkgs = import inputs.stablepkgs {
+        system = "x86_64-linux";
+        config = import ./nixpkgs-config.nix;
+      };
+
       vim-overlay = (import ./vim-plugins.nix {
         inherit (inputs) darcula ncm2-alchemist ncm2-go ncm2-pyclang ncm2-racer ncm2-tern nvim-typescript ncm2-vim vim-mix-format;
       });
@@ -97,6 +103,7 @@
           nix-bisect = inputs.nix-bisect;
 
           inherit (newpkgs) direnv;
+          inherit (stablepkgs) gnupg;
         } //
         (import ./pkgs {
           inherit (self) callPackage;

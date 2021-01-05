@@ -105,11 +105,11 @@
     "mammothoverlays": {
       "locked": {
         "dir": "overlays",
-        "lastModified": 1609576265,
-        "narHash": "sha256-Sis8wd/OMecaooB5qc6Iyjd/IwNhMkXAE44LdU3Tdmk=",
+        "lastModified": 1609867654,
+        "narHash": "sha256-epV2/B1Gltf35gAypExmI6iwl/2reE4URUi9aZDywaU=",
         "owner": "mammothbane",
         "repo": "nixpkgs-own",
-        "rev": "04e19374698094765d1bf17bfc2f1d5d6329a6bf",
+        "rev": "c7514da963fbc6c4702051811ca3b8aec4157cec",
         "type": "github"
       },
       "original": {
@@ -362,7 +362,24 @@
         "nix-bisect": "nix-bisect",
         "nixpkgs": "nixpkgs_2",
         "nvim-typescript": "nvim-typescript",
+        "stablepkgs": "stablepkgs",
         "vim-mix-format": "vim-mix-format"
+      }
+    },
+    "stablepkgs": {
+      "locked": {
+        "lastModified": 1609867866,
+        "narHash": "sha256-ITciATW51g/VqL4CTCh74Cu/wqIztkoJNZJxqj2vEMs=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "4a75ca4a4e7d14e7b0b0230b3ea57b5bd7c16218",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "release-20.09",
+        "repo": "nixpkgs",
+        "type": "github"
       }
     },
     "vim-mix-format": {
