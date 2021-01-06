@@ -58,6 +58,7 @@
     iputils
     netcat-gnu
     openssh
+    dnsutils
 
     # newer/specialized find and transform
     fd
