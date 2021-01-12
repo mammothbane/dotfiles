@@ -45,6 +45,7 @@
       vim-nix
       vim-toml
       vim-terraform
+      vim-bazel
 
       ncm2
       nvim-yarp
