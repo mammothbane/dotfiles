@@ -23,6 +23,7 @@
     remmina
 
     xclip
+    pulseaudio
 
     yubioath-desktop
 

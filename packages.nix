@@ -22,6 +22,7 @@
     acl
     gnupatch
     gnused
+    lsof
 
     # runtime system
     systemd
