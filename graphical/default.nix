@@ -32,7 +32,12 @@
     jetbrains.idea-ultimate
     jetbrains.clion
     jetbrains.pycharm-professional
+
+    ipafont
+    kochi-substitute
   ];
+
+  fonts.fontconfig.enable = true;
 
   programs = {
     obs-studio.enable = true;
