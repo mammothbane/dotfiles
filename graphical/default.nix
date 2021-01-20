@@ -51,6 +51,7 @@
 
   services = {
     pasystray.enable = true;
+    blueman-applet.enable = true;
 
     unclutter = {
       enable = true;
